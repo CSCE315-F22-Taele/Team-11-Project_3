@@ -3,27 +3,28 @@ import React from 'react';
 import App from './App';
 import Manager from './Manager';
 import Server from './Server';
+import Customer from './Customer';
 import ReactDOM from 'react-dom/client';
 
-function New_Order() {
+function New_Customer_Order() {
   function addToOrder(item) {
     const markupParagraph = document.getElementById("receipt");
     markupParagraph.innerText += item + '\n';
   }
-  function returnToServerPage() {
+  function returnToCustomerPage() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
-        <Server />
+        <Customer />
       </React.StrictMode>
     );
   }
-  function runQueryAndReturnToServerPage() {
-    //TODO: Run a query
+  function runQueryAndReturnToCustomerPage() {
+    //TODO: Run query
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
-        <Server />
+        <Customer />
       </React.StrictMode>
     );
   }
@@ -61,8 +62,8 @@ function New_Order() {
             <button type="button" onClick={() => addToOrder('Strawberry Milkshake')}>Strawberry Milkshake</button>
             </div>
             <div className="flex-container-order-buttons">
-            <button type="button" onClick={returnToServerPage}>Cancel</button>
-            <button type="button" onClick={runQueryAndReturnToServerPage}>Submit</button>
+            <button type="button" onClick={returnToCustomerPage}>Cancel</button>
+            <button type="button" onClick={runQueryAndReturnToCustomerPage}>Submit</button>
           </div>
           </div>
           
@@ -72,4 +73,4 @@ function New_Order() {
     );
   }
   
-export default New_Order;
+export default New_Customer_Order;
