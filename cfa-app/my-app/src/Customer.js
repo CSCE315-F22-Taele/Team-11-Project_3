@@ -24,20 +24,20 @@ function Customer() {
       </React.StrictMode>
     );
   }
-    return (
-      <div>
-        <header className="SelectRole">
-          <p>
-            Welcome To Customer Page!
-          </p>
-          <div className="flex-container">
-            <button type="button" onClick={ReturnToHome}>Return</button>
-            <button type="button" onClick={GoToNewOrder}>New Order</button>
-          </div>
-        </header>
-      </div>
-      
-    );
-  }
-  
+  return (
+    <div>
+      <header className="SelectRole">
+        <div class="flex-container">
+          <div class="returnDiv"><button type="button" class="returnButton" onClick={ReturnToHome}>Return</button></div><div class="pageHeader">Welcome To Customer Page!</div>
+        </div>
+        <div className="container">
+          <button type="button" onClick={ReturnToHome}>Return</button>
+          <button type="button" onClick={GoToNewOrder}>New Order</button>
+        </div>
+      </header>
+    </div>
+
+  );
+}
+
 export default Customer;

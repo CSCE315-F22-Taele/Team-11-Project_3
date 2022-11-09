@@ -15,23 +15,23 @@ function Sales_Report() {
       </React.StrictMode>
     );
   }
-    return (
+  return (
 
-      <div>
-        <header className="SelectRole">
-          <p>
-            Welcome To Sales Report Page!
-          </p>
-          <div className="flex-container">
-        <button type="button" onClick={ReturnToManager}>Return</button>
+    <div>
+      <header className="SelectRole">
+        <div class="flex-container">
+          <div class="returnDiv"><button type="button" class="returnButton" onClick={ReturnToManager}>Return</button></div><div class="pageHeader">Sales Report</div>
         </div>
-        </header>
-      </div>
+        <div className="container">
+          <button type="button" onClick={ReturnToManager}>Return</button>
+        </div>
+      </header>
+    </div>
 
-      
 
-      
-    );
-  }
-  
+
+
+  );
+}
+
 export default Sales_Report;
