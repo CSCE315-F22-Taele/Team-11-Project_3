@@ -5,7 +5,7 @@ import Server from './Server';
 import Customer from './Customer';
 import ReactDOM from 'react-dom/client';
 
-function App() {
+function RolePage() {
   function GoToManager() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
@@ -48,4 +48,4 @@ function App() {
   );
 }
 
-export default App;
+export default RolePage;
