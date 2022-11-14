@@ -68,29 +68,29 @@ function Manager() {
       </React.StrictMode>
     );
   }
-    return (
+  return (
 
-      <div>
-        <header className="SelectRole">
-          <p>
-            Welcome To Manager Page!
-          </p>
-          <div className="flex-container">
-        <button type="button" onClick={GoToEditInventory}> Edit Inventory</button>
-        <button type="button" onClick={GoToEditMenu}> Edit Menu</button>
-        <button type="button" onClick={GoToSalesReport}> Sales Report</button>
-        <button type="button" onClick={GoToExcessReport}> Excess Report</button>
-        <button type="button" onClick={GoToRestockReport}> Restock Report</button>
-        <button type="button" onClick={GoToAddSeasonalMenuItem}> Add Seasonal Menu Item</button>
-        <button type="button" onClick={ReturnToHome}>Return</button>
+    <div>
+      <header className="SelectRole">
+        <div class="flex-container">
+          <div class="returnDiv"><button type="button" class="returnButton" onClick={ReturnToHome}>Return</button></div><div class="pageHeader">Welcome To Manager Page!</div>
         </div>
-        </header>
-      </div>
+        <div className="container">
+          <button type="button" onClick={GoToEditInventory}> Edit Inventory</button>
+          <button type="button" onClick={GoToEditMenu}> Edit Menu</button>
+          <button type="button" onClick={GoToSalesReport}> Sales Report</button>
+          <button type="button" onClick={GoToExcessReport}> Excess Report</button>
+          <button type="button" onClick={GoToRestockReport}> Restock Report</button>
+          <button type="button" onClick={GoToAddSeasonalMenuItem}> Add Seasonal Menu Item</button>
 
-      
+        </div>
+      </header>
+    </div>
 
-      
-    );
-  }
-  
+
+
+
+  );
+}
+
 export default Manager;

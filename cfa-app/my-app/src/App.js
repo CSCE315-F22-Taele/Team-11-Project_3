@@ -33,18 +33,18 @@ function App() {
   return (
     <div>
       <header className="SelectRole">
-        <p>
+        <div class="appHeader">
           Please Select A Role:
-        </p>
+        </div>
       </header>
-      <div className="flex-container">
+      <div className="container">
         <button type="button" onClick={GoToManager}>Manager</button>
         <button type="button" onClick={GoToServer}>Server</button>
         <button type="button" onClick={GoToCustomer}>Customer</button>
       </div>
-      
+
     </div>
-    
+
   );
 }
 

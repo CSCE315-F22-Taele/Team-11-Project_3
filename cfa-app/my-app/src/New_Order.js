@@ -27,16 +27,16 @@ function New_Order() {
       </React.StrictMode>
     );
   }
-    return (
-      <div>
-        <header className="SelectRole">
-          <p>
-            New Order
-          </p>
-          <div className="flex-container">
-            <div id="receipt" class="box">Order Receipt <br></br><br></br>
-            </div>
-            <div className="flex-container-order-buttons">
+  return (
+    <div>
+      <header className="SelectRole">
+        <div class="flex-container">
+          <div class="returnDiv"><button type="button" class="returnButton" onClick={returnToServerPage}>Return</button></div><div class="pageHeader">New Order</div>
+        </div>
+        <div className="flex-container">
+          <div id="receipt" class="box">Order Receipt <br></br><br></br>
+          </div>
+          <div className="flex-container-order-buttons">
             <button type="button" onClick={() => addToOrder('8 ct Chick-fil-A Nuggets')}>8 ct Chick-fil-A Nuggets</button>
             <button type="button" onClick={() => addToOrder('12 ct Chick-fil-A Nuggets')}>12 ct Chick-fil-A Nuggets</button>
             <button type="button" onClick={() => addToOrder('3 ct Chick-fil-A Chick-n-Strips')}>3 ct Chick-fil-A Chick-n-Strips</button>
@@ -59,17 +59,17 @@ function New_Order() {
             <button type="button" onClick={() => addToOrder('Chocolate Milkshake')}>Chocolate Milkshake</button>
             <button type="button" onClick={() => addToOrder('Vanilla Milkshake')}>Vanilla Milkshake</button>
             <button type="button" onClick={() => addToOrder('Strawberry Milkshake')}>Strawberry Milkshake</button>
-            </div>
-            <div className="flex-container-order-buttons">
+          </div>
+          <div className="flex-container-order-buttons">
             <button type="button" onClick={returnToServerPage}>Cancel</button>
             <button type="button" onClick={runQueryAndReturnToServerPage}>Submit</button>
           </div>
-          </div>
-          
-        </header>
-      </div>
-      
-    );
-  }
-  
+        </div>
+
+      </header>
+    </div>
+
+  );
+}
+
 export default New_Order;
