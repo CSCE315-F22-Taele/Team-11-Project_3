@@ -1,6 +1,11 @@
-from flask import Flask
 import datetime
-import random, time, psycopg2, sys
+import random
+import sys
+import time
+
+import psycopg2
+from flask import Flask
+
 connection = psycopg2.connect(host='csce-315-db.engr.tamu.edu', database='csce315_912_11', user='csce315_912_matl', password='1')
 cursor = connection.cursor()
 
@@ -15,19 +20,41 @@ app = Flask(__name__)
 @app.route('/data/<queryStr>')
 def get_time(queryStr):
     cursor.execute(queryStr)
+    myArr = []
     myStr = ""
 
     for query in cursor:
-        myStr += str(query)
+        myArr.append(str(query))
+        myStr += str(query) + '.'
     # Returning an api for showing in  reactjs
     return {
-        'Name':myStr, 
-        "Age":"1000",
-        "Date":x, 
-        "programming":"python broooo"
+        'QueryResult':myArr
         }
   
-      
+@app.route('/data/itemtable')
+def get_itemtable():
+    cursor.execute('SELECT * FROM itemtable')
+    myArr = []
+
+    for query in cursor:
+        myArr.append(str(query))
+    # Returning an api for showing in  reactjs
+    return {
+        'QueryResult':myArr
+        }
+
+@app.route('/result/<queryStr>')
+def run_update(queryStr):
+    cursor.execute(queryStr)
+
+    # Returning an api for showing in  reactjs
+    connection.commit()
+    return {
+        'QueryResult':'Success'
+        }
+    
+
+
 # Running app
 if __name__ == '__main__':
-    app.run(port=3001,debug=True)
+    app.run(port=5000,debug=True)
