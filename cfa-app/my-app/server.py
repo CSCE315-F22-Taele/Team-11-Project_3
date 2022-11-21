@@ -43,6 +43,30 @@ def get_itemtable():
         'QueryResult':myArr
         }
 
+@app.route('/data/menutable')
+def get_menutable():
+    cursor.execute('SELECT * FROM menutable')
+    myArr = []
+
+    for query in cursor:
+        myArr.append(str(query))
+    # Returning an api for showing in  reactjs
+    return {
+        'QueryResult':myArr
+        }
+
+@app.route('/data/ordertable')
+def get_ordertable():
+    cursor.execute('SELECT * FROM ordertable')
+    myArr = []
+
+    for query in cursor:
+        myArr.append(str(query))
+    # Returning an api for showing in  reactjs
+    return {
+        'QueryResult':myArr
+        }
+
 @app.route('/result/<queryStr>')
 def run_update(queryStr):
     cursor.execute(queryStr)
