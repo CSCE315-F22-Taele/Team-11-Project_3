@@ -56,7 +56,17 @@ function New_Order() {
       </React.StrictMode>
     );
   }
-  function Submit_Order(contents, cost) {
+  function runQueryAndReturnToServerPage() {
+    //TODO: Run a query
+    var orderComposition = "";
+    for (var i = 0; i < listOfMenuItems.length; i++){ 
+      if (i != listOfMenuItems.length - 1) {
+        orderComposition += listOfMenuItems[i]
+        orderComposition += "|";
+      } else {
+        orderComposition += listOfMenuItems[i]
+      }
+    }
     const dateObj = new Date();
     
     let year = dateObj.getFullYear();
@@ -74,24 +84,7 @@ function New_Order() {
     const time = `${year}-${month}-${date} ${hour}:${minute}:${second}`;
     //var queryToRun = "INSERT INTO ordertable (order_id, contents, total_cost, time) VALUES(" + currentOrderNumber + ", " + contents + ", " + cost + ", " + time;
     //fetch("/result/" + queryToRun);
-    window.alert("Got to down all here");
-  }
-
-
-  function runQueryAndReturnToServerPage() {
-    //TODO: Run a query
-    var orderComposition = "";
-    for (var i = 0; i < listOfMenuItems.length; i++){ 
-      if (i != listOfMenuItems.length - 1) {
-        orderComposition += listOfMenuItems[i]
-        orderComposition += "|";
-      } else {
-        orderComposition += listOfMenuItems[i]
-      }
-    }
-    window.alert(orderComposition);
-
-    Submit_Order(orderComposition, totalCost);
+    
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
