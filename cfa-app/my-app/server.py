@@ -5,6 +5,7 @@ import time
 
 import psycopg2
 from flask import Flask
+from flask import json
 
 connection = psycopg2.connect(host='csce-315-db.engr.tamu.edu', database='csce315_912_11', user='csce315_912_matl', password='1')
 cursor = connection.cursor()
@@ -69,6 +70,7 @@ def get_ordertable():
 
 @app.route('/result/<queryStr>')
 def run_update(queryStr):
+    print(queryStr)
     cursor.execute(queryStr)
 
     # Returning an api for showing in  reactjs
@@ -77,27 +79,18 @@ def run_update(queryStr):
         'QueryResult':'Success'
         }
 
-# # update order table when submit is clicked 
-# @app.route('/update/ordertable')
-# def run_update(TODO):
-#     cursor.execute(TODO)
+@app.route('/data/lastorder')
+def get_lastorder():
+    cursor.execute('SELECT * FROM ordertable ORDER BY order_id DESC LIMIT 1;')
+    myArr = []
 
-#     # Returning an api for showing in  reactjs
-#     connection.commit()
-#     return {
-#         'QueryResult':'Success'
-#         }
-
-# # update order table when submit is clicked 
-# @app.route('/update/itemtable')
-# def run_update(TODO):
-#     cursor.execute(TODO)
-
-#     # Returning an api for showing in  reactjs
-#     connection.commit()
-#     return {
-#         'QueryResult':'Success'
-#         }
+    for query in cursor:
+        myArr.append(str(query))
+    # Returning an api for showing in  reactjs
+    print(myArr[0].split()[0].strip('(').strip(','))
+    return {
+        'QueryResult':myArr[0].split()[0].strip('(').strip(',')
+        }
     
 
 
