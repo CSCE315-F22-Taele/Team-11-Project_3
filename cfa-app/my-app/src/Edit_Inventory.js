@@ -59,51 +59,6 @@ function Edit_Inventory() {
     );
   }
 
-  // function initialize() {
-  //   const [data, setdata] = useState({
-  //     QueryResult: "n/a"
-  //   });
-
-  //   // Using useEffect for single rendering
-  //   useEffect(() => {
-  //       // Using fetch to fetch the api from 
-  //       // flask server it will be redirected to proxy
-  //       fetch("/data/itemtable").then((res) =>
-  //           res.json().then((data) => {
-  //               // Setting a data from api
-  //               setdata({
-  //                   QueryResult: data.QueryResult
-  //               });
-  //           })
-  //       );
-  //   }, []);
-
-    
-
-
-
-  //   itemArr = data.QueryResult;
-  //   newItem = [];
-  //   for (var i = 0; i < itemArr.length; i++){
-  //     newItem.push(itemArr[i].replaceAll("'", "").replaceAll("(", "").replaceAll(")", "").trim().split(','));
-  //   }
-  //   listOfItems = [];
-  //   for (var i = 0; i < newItem.length; i++){
-  //     listOfItems.push(
-  //       {"Name":newItem[i][0],
-  //       "Type":newItem[i][1],
-  //       "Cost":newItem[i][2],
-  //       "Quantity":newItem[i][3],
-  //       "Reorder_Threshold":newItem[i][4]
-  //     }
-  //     )
-  //   }
-
-
-    // setPrice('55');
-
-  //}
-
 
   function SubmitUpdate(){
       // Using fetch to fetch the api from 
