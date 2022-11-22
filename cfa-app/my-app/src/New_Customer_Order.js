@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Server from './Server';
 import { costArr } from './Server';
 import ReactDOM from 'react-dom/client';
+import Customer from './Customer';
 
 
 function New_Customer_Order() {
@@ -11,6 +12,7 @@ function New_Customer_Order() {
   var itemArr;
   var newItem;
   var totalCost = 0.0;
+  var newOrderNumber;
   listOfMenuItems = [];
 
   var seasonalItemStatus = false;
@@ -23,6 +25,10 @@ function New_Customer_Order() {
     QueryResult: "n/a"
   });
 
+  const [orderNumber, setOrderNumber] = useState({
+    orderNum: 0
+  });
+
   useEffect(() => {
     // Using fetch to fetch the api from 
     // flask server it will be redirected to proxy
@@ -31,6 +37,15 @@ function New_Customer_Order() {
             // Setting a data from api
             setdata({
                 QueryResult: data.QueryResult
+            });
+        })
+    );
+
+    fetch("/data/lastorder").then((res) =>
+        res.json().then((orderNumber) => {
+            // Setting a data from api
+            setOrderNumber({
+                orderNum: orderNumber.QueryResult
             });
         })
     );
@@ -51,6 +66,8 @@ function New_Customer_Order() {
     costArr[newItem[i][0]] = newItem[i][2];
   } 
 
+  newOrderNumber = parseInt(orderNumber.orderNum) + 1;
+
   
   function addToOrder(item) {
     const markupParagraph = document.getElementById("receipt");
@@ -64,7 +81,7 @@ function New_Customer_Order() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
-        <Server />
+        <Customer />
       </React.StrictMode>
     );
   }
@@ -82,7 +99,7 @@ function New_Customer_Order() {
     const dateObj = new Date();
     
     let year = dateObj.getFullYear();
-    let month = dateObj.getMonth();
+    let month = dateObj.getMonth() + 1;
     month = ('0' + month).slice(-2);
     let date = dateObj.getDate();
     date = ('0' + date).slice(-2);
@@ -94,13 +111,13 @@ function New_Customer_Order() {
     second = ('0' + second).slice(-2);
   
     const time = `${year}-${month}-${date} ${hour}:${minute}:${second}`;
-    //var queryToRun = "INSERT INTO ordertable (order_id, contents, total_cost, time) VALUES(" + currentOrderNumber + ", " + contents + ", " + cost + ", " + time;
-    //fetch("/result/" + queryToRun);
+    var queryToRun = "INSERT INTO ordertable (order_id, contents, total_cost, time) VALUES('" + newOrderNumber + "', '" + orderComposition + "', '" + totalCost + "', '" + time + "');";
+    fetch("/result/" + queryToRun);
     
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
-        <Server />
+        <Customer />
       </React.StrictMode>
     );
     
