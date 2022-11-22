@@ -12,6 +12,12 @@ function New_Order() {
   var totalCost = 0.0;
   listOfMenuItems = [];
 
+  var seasonalItemStatus = false;
+  // const [seasonalItemStatus, setSeasonalItemStatus] = useState(false);
+  //const [seasonalItem, setSeasonalItem] = useState('');
+  var seasonalItemName= '';
+
+
   const [data, setdata] = useState({
     QueryResult: "n/a"
   });
@@ -36,8 +42,13 @@ function New_Order() {
   }
   costArr = {};
   for (var i = 0; i < newItem.length; i++){
+    if (newItem[i][0].slice(0, 3) == "SI:"){
+      seasonalItemStatus = true;
+      seasonalItemName = newItem[i][0];
+    }
+    //setSeasonalItemStatus(true);
     costArr[newItem[i][0]] = newItem[i][2];
-  } 
+  }
 
   
   function addToOrder(item) {
@@ -126,13 +137,14 @@ function New_Order() {
             <button type="button" onClick={() => addToOrder('Chocolate Milkshake')}>Chocolate Milkshake</button>
             <button type="button" onClick={() => addToOrder('Vanilla Milkshake')}>Vanilla Milkshake</button>
             <button type="button" onClick={() => addToOrder('Strawberry Milkshake')}>Strawberry Milkshake</button>
+            {seasonalItemStatus && <button type="button" onClick={() => addToOrder(seasonalItemName)}>{seasonalItemName}</button>}
+
           </div>
           <div className="flex-container-order-buttons">
             <button type="button" onClick={returnToServerPage}>Cancel</button>
             <button type="button" onClick={runQueryAndReturnToServerPage}>Submit</button>
           </div>
         </div>
-
       </header>
     </div>
 
