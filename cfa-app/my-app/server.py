@@ -76,6 +76,28 @@ def run_update(queryStr):
     return {
         'QueryResult':'Success'
         }
+
+# # update order table when submit is clicked 
+# @app.route('/update/ordertable')
+# def run_update(TODO):
+#     cursor.execute(TODO)
+
+#     # Returning an api for showing in  reactjs
+#     connection.commit()
+#     return {
+#         'QueryResult':'Success'
+#         }
+
+# # update order table when submit is clicked 
+# @app.route('/update/itemtable')
+# def run_update(TODO):
+#     cursor.execute(TODO)
+
+#     # Returning an api for showing in  reactjs
+#     connection.commit()
+#     return {
+#         'QueryResult':'Success'
+#         }
     
 
 

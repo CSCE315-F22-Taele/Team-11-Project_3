@@ -78,6 +78,8 @@ function New_Order() {
         orderComposition += listOfMenuItems[i]
       }
     }
+    console.log("next log is orderComp")
+    console.log(orderComposition)
     const dateObj = new Date();
     
     let year = dateObj.getFullYear();

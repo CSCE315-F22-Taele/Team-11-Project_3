@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Server from './Server';
 import { costArr } from './Server';
 import ReactDOM from 'react-dom/client';
+import Customer from './Customer';
 
 
 function New_Customer_Order() {
@@ -64,7 +65,7 @@ function New_Customer_Order() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
-        <Server />
+        <Customer />
       </React.StrictMode>
     );
   }
@@ -100,7 +101,7 @@ function New_Customer_Order() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
-        <Server />
+        <Customer />
       </React.StrictMode>
     );
     
