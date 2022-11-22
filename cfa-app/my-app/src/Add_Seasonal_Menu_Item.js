@@ -6,6 +6,14 @@ import ReactDOM from 'react-dom/client';
 import Manager from "./Manager";
 import React, { useState, useEffect } from 'react';
 
+//TO DELETE ITEM: DELETE FROM menutable WHERE name like 'SI:%';
+// psql -h csce-315-db.engr.tamu.edu -U <username> -d <database>
+// Username = csce315_[section no.]_[last name in lowercase]
+// Multiple last names: Del Potro becomes del_potro 
+// Database = csce315_[section no.]_[team number]
+// Password: first name
+
+
 function Add_Seasonal_Menu_Item() {
 
   var itemArr;
