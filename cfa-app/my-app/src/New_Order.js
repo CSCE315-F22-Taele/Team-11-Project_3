@@ -84,8 +84,6 @@ function New_Order() {
     );
   }
   function runQueryAndReturnToServerPage() {
-
-    console.log(newOrderNumber)
     
     var orderComposition = "";
     for (var i = 0; i < listOfMenuItems.length; i++){ 
@@ -113,7 +111,6 @@ function New_Order() {
     const time = `${year}-${month}-${date} ${hour}:${minute}:${second}`;
     var queryToRun = "INSERT INTO ordertable (order_id, contents, total_cost, time) VALUES('" + newOrderNumber + "', '" + orderComposition + "', '" + totalCost + "', '" + time + "');";
     fetch("/result/" + queryToRun);
-    console.log(queryToRun)
     
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
