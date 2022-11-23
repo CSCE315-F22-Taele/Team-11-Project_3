@@ -15,10 +15,11 @@ x = datetime.datetime.now()
 # Initializing flask app
 app = Flask(__name__)
 
-  
+   
 # Route for seeing a data
 @app.route('/data/<queryStr>')
 def get_time(queryStr):
+    
     cursor.execute(queryStr)
     myArr = []
     myStr = ""
@@ -30,6 +31,8 @@ def get_time(queryStr):
     return {
         'QueryResult':myArr
         }
+
+
   
 @app.route('/data/itemtable')
 def get_itemtable():
