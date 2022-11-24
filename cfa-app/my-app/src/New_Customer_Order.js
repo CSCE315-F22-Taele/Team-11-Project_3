@@ -14,6 +14,7 @@ function New_Customer_Order() {
   var totalCost = 0.0;
   var newOrderNumber;
   listOfMenuItems = [];
+  var lastOrderQuery = 'SELECT * FROM ordertable ORDER BY order_id DESC LIMIT 1;';
 
   var seasonalItemStatus = false;
   // const [seasonalItemStatus, setSeasonalItemStatus] = useState(false);
@@ -41,11 +42,11 @@ function New_Customer_Order() {
         })
     );
 
-    fetch("/data/lastorder").then((res) =>
+    fetch("/data/" + lastOrderQuery).then((res) =>
         res.json().then((orderNumber) => {
             // Setting a data from api
             setOrderNumber({
-                orderNum: orderNumber.QueryResult
+              orderNum: orderNumber.QueryResult[0].replaceAll("'", "").replaceAll("(", "").split(',')[0]
             });
         })
     );
@@ -113,6 +114,11 @@ function New_Customer_Order() {
     const time = `${year}-${month}-${date} ${hour}:${minute}:${second}`;
     var queryToRun = "INSERT INTO ordertable (order_id, contents, total_cost, time) VALUES('" + newOrderNumber + "', '" + orderComposition + "', '" + totalCost + "', '" + time + "');";
     fetch("/result/" + queryToRun);
+
+
+    // TODO: update item tables with decreased inventory
+
+
     
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(

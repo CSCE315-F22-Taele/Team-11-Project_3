@@ -12,6 +12,8 @@ function New_Order() {
   var newOrderNumber;
   var totalCost = 0.0;
   listOfMenuItems = [];
+  var lastOrderQuery = 'SELECT * FROM ordertable ORDER BY order_id DESC LIMIT 1;';
+  var inventoryDict = {}
 
   var seasonalItemStatus = false;
   // const [seasonalItemStatus, setSeasonalItemStatus] = useState(false);
@@ -40,11 +42,11 @@ function New_Order() {
         })
     );
 
-    fetch("/data/lastorder").then((res) =>
+    fetch("/data/" + lastOrderQuery).then((res) =>
         res.json().then((orderNumber) => {
             // Setting a data from api
             setOrderNumber({
-                orderNum: orderNumber.QueryResult
+                orderNum: String(orderNumber.QueryResult[0]).replaceAll("'", "").replaceAll("(", "").split(',')[0]
             });
         })
     );
@@ -70,7 +72,7 @@ function New_Order() {
   function addToOrder(item) {
     const markupParagraph = document.getElementById("receipt");
     markupParagraph.innerText += item + costArr[item] + '\n' + '\n';
-    totalCost += +(costArr[item].slice(2));
+    totalCost += +(String(costArr[item]).slice(2));
     const totalParagraph = document.getElementById("total");
     totalParagraph.innerText = "Total: $" + String(totalCost.toFixed(2));
     listOfMenuItems.push(item);
@@ -84,7 +86,6 @@ function New_Order() {
     );
   }
   function runQueryAndReturnToServerPage() {
-    
     var orderComposition = "";
     for (var i = 0; i < listOfMenuItems.length; i++){ 
       if (i != listOfMenuItems.length - 1) {
@@ -111,6 +112,44 @@ function New_Order() {
     const time = `${year}-${month}-${date} ${hour}:${minute}:${second}`;
     var queryToRun = "INSERT INTO ordertable (order_id, contents, total_cost, time) VALUES('" + newOrderNumber + "', '" + orderComposition + "', '" + totalCost + "', '" + time + "');";
     fetch("/result/" + queryToRun);
+
+    console.log(listOfMenuItems)
+    var i = 0;
+    // TODO: create dictionary of inventory item and number of times used in order
+    while(i < listOfMenuItems.length){
+      queryToRun = "SELECT composition FROM menutable WHERE name = '" + listOfMenuItems[i] + "';"
+      fetch("/data/" + queryToRun).then((res) =>
+        res.json().then((result) => {
+          let contents = String(result.QueryResult[0]).replaceAll("'", "").replaceAll("(", "").replaceAll(")", "").replaceAll(",", "").replaceAll("| ", "|").trim().split('|');
+          if(contents[0] != "undefined"){
+            for(var j = 0; j < contents.length; j++){
+              if(contents[j] in inventoryDict){
+                inventoryDict[contents[j]] = inventoryDict[contents[j]] + 1
+              }
+              else{
+                inventoryDict[contents[j]] = 1;
+              }
+            }
+          }
+        }))
+        i++
+    }
+
+    console.log(inventoryDict)
+    // TODO: update item tables with decreased inventory
+    const items = Object.keys(inventoryDict);
+    console.log(Object.values(inventoryDict))
+    for(var item in inventoryDict){
+      console.log(item + " : " + inventoryDict[item])
+      // queryToRun = "SELECT quantity FROM itemtable where name = '" + items[i] + "';"
+      // console.log(queryToRun)
+      // fetch("/data/" + queryToRun).then((res) =>
+      //   res.json().then((result) => {
+      //     let quant = String(result.QueryResult[0]);
+      //     console.log(quant)
+      //   }))
+    }
+
     
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
