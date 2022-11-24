@@ -4,6 +4,7 @@ import Manager from './Manager';
 import Server from './Server';
 import Customer from './Customer';
 import ReactDOM from 'react-dom/client';
+import { Button } from 'antd';
 
 function RolePage() {
   function GoToManager() {
@@ -38,9 +39,9 @@ function RolePage() {
         </div>
       </header>
       <div className="container">
-        <button type="button" onClick={GoToManager}>Manager</button>
-        <button type="button" onClick={GoToServer}>Server</button>
-        <button type="button" onClick={GoToCustomer}>Customer</button>
+        <Button type="primary" onClick={GoToManager}>Manager</Button >
+        <Button type="primary" onClick={GoToServer}>Server</Button >
+        <Button type="primary" onClick={GoToCustomer}>Customer</Button >
       </div>
 
     </div>

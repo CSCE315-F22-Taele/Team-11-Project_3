@@ -1,10 +1,12 @@
 import './App.css';
+import './index.css';
 import React, { useState, useEffect } from "react";
 import App from './App';
 import Server from './Server';
 import Customer from './Customer';
 import ReactDOM from 'react-dom/client';
 import Manager from "./Manager";
+import { Button, Select, Form, Input } from 'antd';
 
 function Edit_Inventory() {
 
@@ -83,13 +85,13 @@ function Edit_Inventory() {
   const [reorder_threshold, setReorder_threshold] = useState('100');
   
   
-  const handleChange = event => {
-    setSelected(event.target.value);
-    var currVals = listOfItems.find(element => element.Name == event.target.value);
+  const handleChange = (event) => {
+    console.log(event)
+    setSelected(event);
+    var currVals = listOfItems.find(element => element.Name == event);
     setPrice(currVals.Cost);
     setQuantity(currVals.Quantity);
     setReorder_threshold(currVals.Reorder_Threshold);
-
   };
 
   const handlePrice = event => {
@@ -112,11 +114,11 @@ function Edit_Inventory() {
     <div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="returnDiv"><button type="button" class="returnButton" onClick={ReturnToManager}>Return</button></div><div class="pageHeader">Edit Inventory</div>
+          <div class="pageHeader">Edit Inventory</div>
         </div>
       </header>
-      <div className="scrollTable">
-      <table>
+      <div className="scrollTab">
+      <table className="padding-table-columns" cellpadding="2"cellspacing="15">
           <thead>
             <tr>
               <th>Name</th>
@@ -141,39 +143,43 @@ function Edit_Inventory() {
           </tbody>
         </table>
         </div>
-        <div>
-        <select value={selected} onChange={handleChange}>
-        {listOfItems.map((option) => (
+        <div >
+          <Select value={selected} onChange={handleChange}>
+          {listOfItems.map((option) => (
 
-          <option value={option.Name}>{option.Name}</option>
+            <Select.Option value={option.Name}>{option.Name}</Select.Option>
 
-        ))}
-      
+          ))}
+          </Select>
 
-       </select>
-
-       <form>
-        <label>Price:
-          <input type="text"
-          value={price}
-          onChange={handlePrice}/>
-        </label>
-        <label>Quantity:
-          <input type="text"
-          value={quantity}
-          onChange={handleQuantity}/>
-        </label>
-        <label>Reorder Threshold:
-          <input type="text"
-          value={reorder_threshold}
-          onChange={handleReorder}/>
-        </label>
-        </form>
-        <button onClick={SubmitUpdate}>Submit</button>
-
-
-
+          <Form className="form">
+            <label>Price:
+              <Input type="text"
+                className="inputs"
+                value={price}
+                onChange={handlePrice}/>
+            </label>
+            
+            <label>Quantity:
+              <Input type="text"
+                className="edit-inventory-inputs"
+                value={quantity}
+                onChange={handleQuantity}/>
+            </label>
+          
+            <label>Reorder Threshold:
+              <Input type="text"
+                className="edit-inventory-inputs"
+                value={reorder_threshold}
+                onChange={handleReorder}/>
+            </label>
+          </Form>
         </div>
+
+      <div class="footerdiv">
+        <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
+        <Button type="primary" onClick={SubmitUpdate}>Submit</Button>
+      </div>
     </div>
 
 
