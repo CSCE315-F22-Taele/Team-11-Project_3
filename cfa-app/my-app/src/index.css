@@ -128,6 +128,7 @@ button {
 
 /* ant design component styling */
 
+/* default button */
 .ant-btn {
   color: #FFFFFF;
   background-color: #E60E33;
@@ -145,6 +146,7 @@ button {
   width: max-content;
 }
 
+/* primary button */
 .ant-btn-primary {
   color: #E60E33;
   background-color: #FFFFFF;
@@ -163,6 +165,12 @@ button {
   font-weight: bold;
 }
 
+/* selectors (dropdown menues) */
+
+.ant-select:hover{
+  border-color: #E60E33 !important;
+}
+
 .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
   margin-top: 7px;
   margin-bottom: 7px;
@@ -171,5 +179,17 @@ button {
 }
 
 .ant-select-single:not(.ant-select-customize-input) .ant-select-selector:hover {
+  border-color: #E60E33 !important;
+}
+
+/* input (user input boxes) */
+
+.ant-input:hover{
   border-color: #E60E33;
+  border-inline-end-width: 2px;
+}
+
+.ant-input:focus{
+  border-color: #E60E33;
+  border-inline-end-width: 2px;
 }
