@@ -111,7 +111,7 @@ function Edit_Inventory() {
   // initialize();
   return (
 
-    <div>
+    <div id='body'>
       <div class="headerdiv">
         Chick-fil-A!
       </div>

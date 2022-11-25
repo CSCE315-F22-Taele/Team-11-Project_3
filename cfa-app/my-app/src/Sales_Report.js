@@ -182,7 +182,7 @@ function Sales_Report() {
  
   return (
     
-    <div>
+    <div id='body'>
       <div class="headerdiv">
         Chick-fil-A!
       </div>

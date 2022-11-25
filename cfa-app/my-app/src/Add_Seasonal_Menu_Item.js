@@ -6,7 +6,7 @@ import Customer from './Customer';
 import ReactDOM from 'react-dom/client';
 import Manager from "./Manager";
 import React, { useState, useEffect } from 'react';
-import { Button, Select, Form, Input } from 'antd';
+import { Button, Select, Input } from 'antd';
 
 //TO DELETE ITEM: DELETE FROM menutable WHERE name like 'SI:%';
 // psql -h csce-315-db.engr.tamu.edu -U <username> -d <database>
@@ -145,7 +145,7 @@ for (var i = 0; i < newItem.length; i++){
   
     return (
 
-      <div>
+      <div id='body'>
         <div class="headerdiv">
         Chick-fil-A!
       </div>
@@ -209,17 +209,7 @@ for (var i = 0; i < newItem.length; i++){
         <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
         <Button type="primary" onClick={submitNewMenuItem}>Submit Seasonal Item</Button>
       </div>
-        
-
-       
-      </div>
-
-      
-
-
-      
-
-      
+      </div>      
     );
   }
   

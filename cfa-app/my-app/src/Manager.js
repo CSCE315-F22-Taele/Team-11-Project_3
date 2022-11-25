@@ -72,7 +72,7 @@ function Manager() {
   }
   return (
 
-    <div>
+    <div id='body'>
       <div class="headerdiv">
         Chick-fil-A!
       </div>

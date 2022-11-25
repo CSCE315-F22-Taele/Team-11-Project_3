@@ -79,7 +79,7 @@ const handlePrice = event => {
   }
 
   return (
-    <div>
+    <div id='body'>
       <div class="headerdiv">
         Chick-fil-A!
       </div>

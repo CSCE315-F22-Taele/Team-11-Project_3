@@ -1,8 +1,10 @@
 import './App.css';
+import './index.css'
 import React, { useState, useEffect } from 'react';
 import Server from './Server';
 import { costArr } from './Server';
 import ReactDOM from 'react-dom/client';
+import { Button, Select, Form, Input } from 'antd';
 
 function New_Order() {
   var listOfMenuItems;
@@ -160,47 +162,51 @@ function New_Order() {
     
   }
   return (
-    <div>
+    <div id='body'>
+      <div class="headerdiv">
+        Chick-fil-A!
+      </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="returnDiv"><button type="button" class="returnButton" onClick={returnToServerPage}>Return</button></div><div class="pageHeader">New Order</div>
+          <div class="pageHeader">New Order!</div>
         </div>
         <div id="total" >Total: $0.00</div>
         <div className="flex-container">
           <div id="receipt" class="box">Order Receipt: <br></br><br></br>
           </div>
           <div className="flex-container-order-buttons">
-            <button type="button" onClick={() => addToOrder('8 ct Chick-fil-A Nuggets')}>8 ct Chick-fil-A Nuggets</button>
-            <button type="button" onClick={() => addToOrder('12 ct Chick-fil-A Nuggets')}>12 ct Chick-fil-A Nuggets</button>
-            <button type="button" onClick={() => addToOrder('3 ct Chick-fil-A Chick-n-Strips')}>3 ct Chick-fil-A Chick-n-Strips</button>
-            <button type="button" onClick={() => addToOrder('4 ct Chick-fil-A Chick-n-Strips')}>4 ct Chick-fil-A Chick-n-Strips</button>
-            <button type="button" onClick={() => addToOrder('Chicken Sandwich')}>Chicken Sandwich</button>
-            <button type="button" onClick={() => addToOrder('Deluxe Sandwich')}>Deluxe Sandwich</button>
-            <button type="button" onClick={() => addToOrder('Grilled Chicken Sandwich')}>Grilled Chicken Sandwich</button>
-            <button type="button" onClick={() => addToOrder('Grilled Chicken Club Sandwich')}>Grilled Chicken Club Sandwich</button>
-            <button type="button" onClick={() => addToOrder('Small Fries')}>Small Fries</button>
-            <button type="button" onClick={() => addToOrder('Medium Fries')}>Medium Fries</button>
-            <button type="button" onClick={() => addToOrder('Large Fries')}>Large Fries</button>
-            <button type="button" onClick={() => addToOrder('3 ct Spicy Chick-fil-A Chick-n-Strips')}>3 ct Spicy Chick-fil-A Chick-n-Strips</button>
-            <button type="button" onClick={() => addToOrder('4 ct Spicy Chick-fil-A Chick-n-Strips')}>4 ct Spicy Chick-fil-A Chick-n-Strips</button>
-            <button type="button" onClick={() => addToOrder('8 ct Chick-fil-A Grilled Nuggets')}>8 ct Chick-fil-A Grilled Nuggets</button>
-            <button type="button" onClick={() => addToOrder('12 ct Chick-fil-A Grilled Nuggets')}>12 ct Chick-fil-A Grilled Nuggets</button>
-            <button type="button" onClick={() => addToOrder('Spicy Chicken Sandwich')}>Spicy Chicken Sandwich</button>
-            <button type="button" onClick={() => addToOrder('Spicy Deluxe Sandwich')}>Spicy Deluxe Sandwich</button>
-            <button type="button" onClick={() => addToOrder('Sweet Tea')}>Sweet Tea</button>
-            <button type="button" onClick={() => addToOrder('Fountain Drink')}>Fountain Drink</button>
-            <button type="button" onClick={() => addToOrder('Chocolate Milkshake')}>Chocolate Milkshake</button>
-            <button type="button" onClick={() => addToOrder('Vanilla Milkshake')}>Vanilla Milkshake</button>
-            <button type="button" onClick={() => addToOrder('Strawberry Milkshake')}>Strawberry Milkshake</button>
-            {seasonalItemStatus && <button type="button" onClick={() => addToOrder(seasonalItemName)}>{seasonalItemName}</button>}
+            <Button type="primary" onClick={() => addToOrder('8 ct Chick-fil-A Nuggets')}>8 ct Chick-fil-A Nuggets</Button>
+            <Button type="primary" onClick={() => addToOrder('12 ct Chick-fil-A Nuggets')}>12 ct Chick-fil-A Nuggets</Button>
+            <Button type="primary" onClick={() => addToOrder('3 ct Chick-fil-A Chick-n-Strips')}>3 ct Chick-fil-A Chick-n-Strips</Button>
+            <Button type="primary" onClick={() => addToOrder('4 ct Chick-fil-A Chick-n-Strips')}>4 ct Chick-fil-A Chick-n-Strips</Button>
+            <Button type="primary" onClick={() => addToOrder('Chicken Sandwich')}>Chicken Sandwich</Button>
+            <Button type="primary" onClick={() => addToOrder('Deluxe Sandwich')}>Deluxe Sandwich</Button>
+            <Button type="primary" onClick={() => addToOrder('Grilled Chicken Sandwich')}>Grilled Chicken Sandwich</Button>
+            <Button type="primary" onClick={() => addToOrder('Grilled Chicken Club Sandwich')}>Grilled Chicken Club Sandwich</Button>
+            <Button type="primary" onClick={() => addToOrder('Small Fries')}>Small Fries</Button>
+            <Button type="primary" onClick={() => addToOrder('Medium Fries')}>Medium Fries</Button>
+            <Button type="primary" onClick={() => addToOrder('Large Fries')}>Large Fries</Button>
+            <Button type="primary" onClick={() => addToOrder('3 ct Spicy Chick-fil-A Chick-n-Strips')}>3 ct Spicy Chick-fil-A Chick-n-Strips</Button>
+            <Button type="primary" onClick={() => addToOrder('4 ct Spicy Chick-fil-A Chick-n-Strips')}>4 ct Spicy Chick-fil-A Chick-n-Strips</Button>
+            <Button type="primary" onClick={() => addToOrder('8 ct Chick-fil-A Grilled Nuggets')}>8 ct Chick-fil-A Grilled Nuggets</Button>
+            <Button type="primary" onClick={() => addToOrder('12 ct Chick-fil-A Grilled Nuggets')}>12 ct Chick-fil-A Grilled Nuggets</Button>
+            <Button type="primary" onClick={() => addToOrder('Spicy Chicken Sandwich')}>Spicy Chicken Sandwich</Button>
+            <Button type="primary" onClick={() => addToOrder('Spicy Deluxe Sandwich')}>Spicy Deluxe Sandwich</Button>
+            <Button type="primary" onClick={() => addToOrder('Sweet Tea')}>Sweet Tea</Button>
+            <Button type="primary" onClick={() => addToOrder('Fountain Drink')}>Fountain Drink</Button>
+            <Button type="primary" onClick={() => addToOrder('Chocolate Milkshake')}>Chocolate Milkshake</Button>
+            <Button type="primary" onClick={() => addToOrder('Vanilla Milkshake')}>Vanilla Milkshake</Button>
+            <Button type="primary" onClick={() => addToOrder('Strawberry Milkshake')}>Strawberry Milkshake</Button>
+            {seasonalItemStatus && <Button type="primary" onClick={() => addToOrder(seasonalItemName)}>{seasonalItemName}</Button>}
 
-          </div>
-          <div className="flex-container-order-buttons">
-            <button type="button" onClick={returnToServerPage}>Cancel</button>
-            <button type="button" onClick={runQueryAndReturnToServerPage}>Submit</button>
           </div>
         </div>
       </header>
+
+      <div class="footerdiv">
+        <Button onClick={returnToServerPage}>Cancel</Button>
+        <Button type="primary" onClick={runQueryAndReturnToServerPage}>Submit</Button>
+      </div>
     </div>
 
   );
