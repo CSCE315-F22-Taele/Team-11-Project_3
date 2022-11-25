@@ -82,18 +82,18 @@ def run_update(queryStr):
         'QueryResult':'Success'
         }
 
-@app.route('/data/lastorder')
-def get_lastorder():
-    cursor.execute('SELECT * FROM ordertable ORDER BY order_id DESC LIMIT 1;')
-    myArr = []
+# @app.route('/data/lastorder')
+# def get_lastorder():
+#     cursor.execute('SELECT * FROM ordertable ORDER BY order_id DESC LIMIT 1;')
+#     myArr = []
 
-    for query in cursor:
-        myArr.append(str(query))
-    # Returning an api for showing in  reactjs
-    print(myArr[0].split()[0].strip('(').strip(','))
-    return {
-        'QueryResult':myArr[0].split()[0].strip('(').strip(',')
-        }
+#     for query in cursor:
+#         myArr.append(str(query))
+#     # Returning an api for showing in  reactjs
+#     print(myArr[0].split()[0].strip('(').strip(','))
+#     return {
+#         'QueryResult':myArr[0].split()[0].strip('(').strip(',')
+#         }
     
 
 

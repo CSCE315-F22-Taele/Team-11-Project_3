@@ -1,4 +1,5 @@
 import './App.css';
+import './index.css'
 import React from 'react';
 import App from './App';
 import Server from './Server';
@@ -10,6 +11,7 @@ import Sales_Report from './Sales_Report';
 import Excess_Report from './Excess_Report';
 import Restock_Report from './Restock_Report';
 import Add_Seasonal_Menu_Item from './Add_Seasonal_Menu_Item';
+import { Button } from 'antd';
 
 function Manager() {
   function ReturnToHome() {
@@ -70,22 +72,28 @@ function Manager() {
   }
   return (
 
-    <div>
+    <div id='body'>
+      <div class="headerdiv">
+        Chick-fil-A!
+      </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="returnDiv"><button type="button" class="returnButton" onClick={ReturnToHome}>Return</button></div><div class="pageHeader">Welcome To Manager Page!</div>
+          <div class="pageHeader">Welcome To Manager Page!</div>
         </div>
         <div className="container">
-          <button type="button" onClick={GoToEditInventory}> Edit Inventory</button>
-          <button type="button" onClick={GoToEditMenu}> Edit Menu</button>
-          <button type="button" onClick={GoToSalesReport}> Sales Report</button>
-          <button type="button" onClick={GoToExcessReport}> Excess Report</button>
-          <button type="button" onClick={GoToRestockReport}> Restock Report</button>
-          <button type="button" onClick={GoToAddSeasonalMenuItem}> Add Seasonal Menu Item</button>
-
+          <Button type="primary" onClick={GoToEditInventory}> Edit Inventory</Button>
+          <Button type="primary" onClick={GoToEditMenu}> Edit Menu</Button>
+          <Button type="primary" onClick={GoToSalesReport}> Sales Report</Button>
+          <Button type="primary" onClick={GoToExcessReport}> Excess Report</Button>
+          <Button type="primary" onClick={GoToRestockReport}> Restock Report</Button>
+          <Button type="primary" onClick={GoToAddSeasonalMenuItem}> Add Seasonal Menu Item</Button>
         </div>
       </header>
+      <div class="footerdiv">
+        <Button class="returnButton" onClick={ReturnToHome}>Return</Button>
+      </div>
     </div>
+    
 
 
 
