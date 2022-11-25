@@ -14,7 +14,6 @@ body {
   font-size: 25px;
   color: black;
   margin: 50px auto 75px;
-  padding-right: 94px;
 
 }
 
@@ -64,6 +63,20 @@ button {
 }
 
 /* adarsh edits */
+.headerdiv {
+  position: absolute;
+  top: 0px;  
+  width: 100%;
+  height: auto;
+  background-color: #FFFFFF;
+  color: #E60E33;
+  margin-bottom: 500px;
+  display: flex;
+  justify-content: space-evenly;
+  font-family: "Brush Script MT";
+  font-size: xx-large;
+}
+
 .footerdiv {
   position: absolute;
   bottom: 0px;  
@@ -77,11 +90,12 @@ button {
   border: 1px solid #eeccee;
   max-height: 300px;
   overflow-y: scroll;
-  width: 90%;
   margin-left: 3%;
+  margin-right: 3%;
 }
 
 .form{
+  margin-top: 5px;
   margin-left: 3%;
 }
 
@@ -91,10 +105,17 @@ button {
   margin-right: 10px;
 }
 
-.padding-table-columns td
-{
+.inputs-large {
+  width: 200px;
+}
+
+.padding-table-columns td {
     padding:0 70px 0 0; 
     text-align: left;
+}
+
+.margin-from-left {
+  margin-left: 5%;
 }
 
 /* ant design component styling */
@@ -102,12 +123,18 @@ button {
 .ant-btn {
   color: #FFFFFF;
   background-color: #E60E33;
+  font-size: 100%;
+  height: max-content;
+  width: max-content;
 }
 
 .ant-btn-default:not(:disabled):hover{
   color: #E60E33;
   background-color: #FFFFFF;
   border-color: #E60E33;
+  font-size: 100%;
+  height: max-content;
+  width: max-content;
 }
 
 .ant-btn-primary {
@@ -116,6 +143,8 @@ button {
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
   font-size: 100%;
   font-weight: bold;
+  height: max-content;
+  width: max-content;
 }
 
 .ant-btn-primary:not(:disabled):hover {
@@ -129,7 +158,6 @@ button {
 .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
   margin-top: 7px;
   margin-bottom: 7px;
-  margin-left: 10%;
   height: 35px;
   width: 300px;
 }

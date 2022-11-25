@@ -1,4 +1,5 @@
 import './App.css';
+import './index.css'
 import React from 'react';
 import App from './App';
 import Server from './Server';
@@ -72,6 +73,9 @@ function Manager() {
   return (
 
     <div>
+      <div class="headerdiv">
+        Chick-fil-A!
+      </div>
       <header className="SelectRole">
         <div class="flex-container">
           <div class="pageHeader">Welcome To Manager Page!</div>

@@ -1,7 +1,9 @@
 import './App.css';
+import './index.css';
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import Manager from "./Manager";
+import { Button } from 'antd';
 
 function Restock_Report() {
   var itemArr;
@@ -56,12 +58,15 @@ function Restock_Report() {
 
   return (
     <div>
+      <div class="headerdiv">
+        Chick-fil-A!
+      </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="returnDiv"><button type="button" class="returnButton" onClick={ReturnToManager}>Return</button></div><div class="pageHeader">Reorder Report</div>
+          <div class="pageHeader">Reorder Report</div>
         </div>
       </header>
-      <div className="scrollTable">
+      <div className="scrollTab">
       <p>The following items need to be reordered:</p>
       <table cellpadding="2"cellspacing="15">
           <thead>
@@ -85,9 +90,9 @@ function Restock_Report() {
             })}
           </tbody>
         </table>
-        </div>
-        <div>
-
+      </div>
+      <div class="footerdiv">
+        <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
       </div>
      </div>
   );

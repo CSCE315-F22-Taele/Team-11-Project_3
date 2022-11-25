@@ -1,4 +1,5 @@
 import './App.css';
+import './index.css'
 import React from 'react';
 import Manager from './Manager';
 import Server from './Server';
@@ -33,17 +34,21 @@ function RolePage() {
   }
   return (
     <div>
-      <header className="SelectRole">
-        <div class="appHeader">
-          Please Select A Role:
-        </div>
-      </header>
-      <div className="container">
-        <Button type="primary" onClick={GoToManager}>Manager</Button >
-        <Button type="primary" onClick={GoToServer}>Server</Button >
-        <Button type="primary" onClick={GoToCustomer}>Customer</Button >
+      <div class="headerdiv">
+        Chick-fil-A!
       </div>
-
+      <div>
+        <header className="SelectRole">
+          <div class="appHeader">
+            Please Select A Role:
+          </div>
+        </header>
+        <div className="container">
+          <Button type="primary" onClick={GoToManager}>Manager</Button >
+          <Button type="primary" onClick={GoToServer}>Server</Button >
+          <Button type="primary" onClick={GoToCustomer}>Customer</Button >
+        </div>
+      </div>
     </div>
 
   );

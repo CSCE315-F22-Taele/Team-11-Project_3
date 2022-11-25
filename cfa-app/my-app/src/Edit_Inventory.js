@@ -112,6 +112,9 @@ function Edit_Inventory() {
   return (
 
     <div>
+      <div class="headerdiv">
+        Chick-fil-A!
+      </div>
       <header className="SelectRole">
         <div class="flex-container">
           <div class="pageHeader">Edit Inventory</div>
@@ -143,7 +146,7 @@ function Edit_Inventory() {
           </tbody>
         </table>
         </div>
-        <div >
+        <div className="margin-from-left">
           <Select value={selected} onChange={handleChange}>
           {listOfItems.map((option) => (
 
@@ -151,7 +154,9 @@ function Edit_Inventory() {
 
           ))}
           </Select>
-
+        </div>
+        
+        <div>
           <Form className="form">
             <label>Price:
               <Input type="text"
@@ -162,14 +167,14 @@ function Edit_Inventory() {
             
             <label>Quantity:
               <Input type="text"
-                className="edit-inventory-inputs"
+                className="inputs"
                 value={quantity}
                 onChange={handleQuantity}/>
             </label>
           
             <label>Reorder Threshold:
               <Input type="text"
-                className="edit-inventory-inputs"
+                className="inputs"
                 value={reorder_threshold}
                 onChange={handleReorder}/>
             </label>

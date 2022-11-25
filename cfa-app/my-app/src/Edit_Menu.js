@@ -1,4 +1,5 @@
 import './App.css';
+import './index.css'
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import Manager from "./Manager";
@@ -79,6 +80,9 @@ const handlePrice = event => {
 
   return (
     <div>
+      <div class="headerdiv">
+        Chick-fil-A!
+      </div>
       <header className="SelectRole">
         <div class="flex-container">
           <div class="pageHeader">Edit Menu</div>
@@ -104,13 +108,14 @@ const handlePrice = event => {
           </tbody>
         </table>
         </div>
-        <div>
+        <div className="margin-from-left">
           <Select value={selected} onChange={handleChange}>
             {listOfItems.map((option) => (
               <Select.Option value={option.Name}>{option.Name}</Select.Option>
             ))}
           </Select>
-
+        </div>
+        <div>
        <Form className="form">
         <label>Price:
           <Input type="text"

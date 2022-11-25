@@ -1,10 +1,12 @@
 import './App.css';
+import './index.css';
 import App from './App';
 import Server from './Server';
 import Customer from './Customer';
 import ReactDOM from 'react-dom/client';
 import Manager from "./Manager";
 import React, { useState, useEffect } from 'react';
+import { Button, Select, Form, Input } from 'antd';
 
 //TO DELETE ITEM: DELETE FROM menutable WHERE name like 'SI:%';
 // psql -h csce-315-db.engr.tamu.edu -U <username> -d <database>
@@ -122,8 +124,8 @@ for (var i = 0; i < newItem.length; i++){
     setNewMenuItemPrice(event.target.value);
   }
 
-  const handleNewDropdownSelection = event => {
-    setDropdownInput(event.target.value);
+  const handleNewDropdownSelection = (event) => {
+    setDropdownInput(event);
   }
 
   const handleNewItemInput = event => {
@@ -144,40 +146,68 @@ for (var i = 0; i < newItem.length; i++){
     return (
 
       <div>
+        <div class="headerdiv">
+        Chick-fil-A!
+      </div>
         <header className="SelectRole">
           <div className="flex-container">
-        <button type="button" onClick={ReturnToManager}>Return</button>
-        </div>
+            <div class="pageHeader">Add Seasonal Item</div>
+          </div>
         </header>
 
         <div>
-        <table>
-        <tr>
-            <td>New Menu Item Name:</td>
-            <td><input type="text" value={newMenuItemName} onChange={handleNewMenuItemName}/></td>
-          </tr>
-          <tr>
-            <td>New Menu Item Price:</td>
-            <td>$<input type="text" value={newMenuItemPrice} onChange={handleNewMenuItemPrice}/></td>
-          </tr>
-          <tr>
-            <td><select value={dropdownInput} onChange={handleNewDropdownSelection}>
-        {listOfItems.map((option) => (
-          <option value={option.Name}>{option.Name}</option>
-        ))}</select></td>
-        <td>       <button type="button" onClick={addMenuItemIngredient}>Add Ingredient</button></td>
-          </tr>
-          <tr>
-            <td><input type="text" value={newItemInput} onChange={handleNewItemInput}/></td>
-            <td><button type="button" onClick={addMenuItemNewIngredient}>Add New Ingredient</button></td>
-          </tr>
-          <tr>
-            <td>Menu Item Contents:</td>
-            <td>{inputItems}</td>
-          </tr>
+          <table className="margin-from-left">
+            <tr>
+              <td>New Menu Item Name:</td>
+              <td><Input className="inputs-large" type="text" value={newMenuItemName} onChange={handleNewMenuItemName}/></td>
+            </tr>
 
-        </table>
-        <button type="button" onClick={submitNewMenuItem}>Submit Seasonal Item</button>
+            <tr>
+              <td>New Menu Item Price:</td>
+              <td><Input className="inputs-large" type="text" value={newMenuItemPrice} onChange={handleNewMenuItemPrice}/></td>
+            </tr>
+
+            <tr>
+              <td>
+                <Select value={dropdownInput} onChange={handleNewDropdownSelection}>
+                  {listOfItems.map((option) => (
+                  <option value={option.Name}>{option.Name}</option>
+                  ))}
+                </Select>
+              </td>
+
+              <td/>
+
+              <td>
+                <Button type="primary" onClick={addMenuItemIngredient}>Add Ingredient</Button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <Input className="inputs-large" type="text" value={newItemInput} onChange={handleNewItemInput}/>
+              </td>
+
+              <td/>
+
+              <td>
+                <Button type="primary" onClick={addMenuItemNewIngredient}>Add New Ingredient</Button>
+              </td>
+            </tr>
+          </table>
+          
+          <table className="margin-from-left">
+            <tr>
+              <td>Menu Item Contents:</td>
+              <td>{inputItems}</td>
+            </tr>
+          </table>
+      </div>
+
+      
+      <div class="footerdiv">
+        <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
+        <Button type="primary" onClick={submitNewMenuItem}>Submit Seasonal Item</Button>
       </div>
         
 
