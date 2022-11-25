@@ -132,6 +132,9 @@ function New_Customer_Order() {
   }
   return (
     <div id='body'>
+      <div class="headerdiv">
+        Chick-fil-A!
+      </div>
       <header className="SelectRole">
         <div class="flex-container">
           <div class="pageHeader">Place your order below!</div>

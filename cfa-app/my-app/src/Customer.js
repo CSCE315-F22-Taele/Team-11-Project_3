@@ -28,6 +28,9 @@ function Customer() {
   }
   return (
     <div id='body'>
+      <div class="headerdiv">
+        Chick-fil-A!
+      </div>
       <header className="SelectRole">
         <div class="flex-container">
           <div class="pageHeader">Welcome to the Customer Page!</div>
