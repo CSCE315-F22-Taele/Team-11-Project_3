@@ -1,7 +1,9 @@
 import './App.css';
+import './index.css'
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import Manager from "./Manager";
+import { Button, Select, Form, Input } from 'antd';
 
 function Edit_Menu() {
   var itemArr;
@@ -57,9 +59,9 @@ function Edit_Menu() {
 const [selected, setSelected] = useState('Chicken Sandwich');
 const [price, setPrice] = useState('$4.29');
 
-const handleChange = event => {
-  setSelected(event.target.value);
-  var currVals = listOfItems.find(element => element.Name == event.target.value);
+const handleChange = (event) => {
+  setSelected(event);
+  var currVals = listOfItems.find(element => element.Name == event);
   setPrice(currVals.Cost);
 };
 
@@ -77,13 +79,16 @@ const handlePrice = event => {
   }
 
   return (
-    <div>
+    <div id='body'>
+      <div class="headerdiv">
+        Chick-fil-A!
+      </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="returnDiv"><button type="button" class="returnButton" onClick={ReturnToManager}>Return</button></div><div class="pageHeader">Edit Menu</div>
+          <div class="pageHeader">Edit Menu</div>
         </div>
       </header>
-      <div className="scrollTable">
+      <div className="scrollTab">
       <table cellpadding="2"cellspacing="15">
           <thead>
             <tr>
@@ -103,23 +108,28 @@ const handlePrice = event => {
           </tbody>
         </table>
         </div>
+        <div className="margin-from-left">
+          <Select value={selected} onChange={handleChange}>
+            {listOfItems.map((option) => (
+              <Select.Option value={option.Name}>{option.Name}</Select.Option>
+            ))}
+          </Select>
+        </div>
         <div>
-        <select value={selected} onChange={handleChange}>
-        {listOfItems.map((option) => (
-          <option value={option.Name}>{option.Name}</option>
-        ))}
-
-       </select>
-
-       <form>
+       <Form className="form">
         <label>Price:
-          <input type="text"
+          <Input type="text"
+          className="inputs"
           value={price}
           onChange={handlePrice}/>
         </label>
-        </form>
-        <button onClick={SubmitUpdate}>Submit</button>
-        </div>
+        </Form>
+      </div>
+
+      <div class="footerdiv">
+        <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
+        <Button type="primary" onClick={SubmitUpdate}>Submit</Button>
+      </div>
     </div>
 
   );

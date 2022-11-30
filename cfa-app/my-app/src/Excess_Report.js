@@ -1,10 +1,12 @@
 import './App.css';
+import './index.css';
 import React, { useState, useEffect } from 'react';
 import App from './App';
 import Server from './Server';
 import Customer from './Customer';
 import ReactDOM from 'react-dom/client';
 import Manager from "./Manager";
+import { Button, Select, Form, Input } from 'antd';
 
 function Excess_Report() {
   var itemArr;
@@ -23,12 +25,7 @@ function Excess_Report() {
     QueryResult: ""
   });
 
-
-
-
-
   const [date, setPrice] = useState('');
-
 
   const handlePrice = event => {
     setPrice(event.target.value);
@@ -71,9 +68,6 @@ function Excess_Report() {
 
     var todayDate = yyyy + '-' + mm + '-' + dd;
 
-
-
-
     var queryString = "/data/SELECT * FROM ordertable WHERE time BETWEEN '" + date + "' AND '" + todayDate +"'"
     fetch(queryString).then((res) =>
     res.json().then((data) => {
@@ -84,14 +78,6 @@ function Excess_Report() {
         console.log(data.QueryResult)
     })
     );
-
-
-
-
-
-
-
-
 
   }
   
@@ -182,8 +168,6 @@ function Excess_Report() {
         "On Hand" : ingredient_map[key]
         }
       )
-
-
     }
   }
   
@@ -199,16 +183,16 @@ function Excess_Report() {
  
   return (
     
-    <div>
+    <div id='body'>
+      <div class="headerdiv">
+        Chick-fil-A!
+      </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="returnDiv"><button type="button" class="returnButton" onClick={ReturnToManager}>Return</button></div><div class="pageHeader">Excess Report</div>
-        </div>
-        <div className="container">
-          <button type="button" onClick={ReturnToManager}>Return</button>
+          <div class="pageHeader">Excess Report</div>
         </div>
       </header>
-      <div className="scrollTable">
+      <div className="scrollTab">
       <p>The following items have an excess:</p>
       <table cellpadding="2"cellspacing="15">
           <thead>
@@ -234,15 +218,18 @@ function Excess_Report() {
         <div>
 
       </div>
-      <form>
+      <Form className="form">
         <label>Date (yyyy-mm-dd):
-          <input type="text"
+          <Input className="inputs" type="text"
           value = {date}
           onChange={handlePrice}/>
         </label>
-        </form>
-        <button onClick={getData}>Submit</button>
+        </Form>
       
+      <div class="footerdiv">
+        <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
+        <Button type="primary" onClick={getData}>Submit</Button>
+      </div>
    
     </div>
     

@@ -1,9 +1,11 @@
 import './App.css';
+import './index.css'
 import React from 'react';
 import Manager from './Manager';
 import Server from './Server';
 import Customer from './Customer';
 import ReactDOM from 'react-dom/client';
+import { Button } from 'antd';
 
 function RolePage() {
   function GoToManager() {
@@ -31,18 +33,22 @@ function RolePage() {
     );
   }
   return (
-    <div>
-      <header className="SelectRole">
-        <div class="appHeader">
-          Please Select A Role:
-        </div>
-      </header>
-      <div className="container">
-        <button type="button" onClick={GoToManager}>Manager</button>
-        <button type="button" onClick={GoToServer}>Server</button>
-        <button type="button" onClick={GoToCustomer}>Customer</button>
+    <div id='body'>
+      <div class="headerdiv">
+        Chick-fil-A!
       </div>
-
+      <div>
+        <header className="SelectRole">
+          <div class="appHeader">
+            Please Select A Role:
+          </div>
+        </header>
+        <div className="container">
+          <Button type="primary" onClick={GoToManager}>Manager</Button >
+          <Button type="primary" onClick={GoToServer}>Server</Button >
+          <Button type="primary" onClick={GoToCustomer}>Customer</Button >
+        </div>
+      </div>
     </div>
 
   );
