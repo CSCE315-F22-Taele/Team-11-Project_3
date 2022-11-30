@@ -73,7 +73,7 @@ def get_ordertable():
 
 @app.route('/result/<queryStr>')
 def run_update(queryStr):
-    print(queryStr)
+    
     cursor.execute(queryStr)
 
     # Returning an api for showing in  reactjs
