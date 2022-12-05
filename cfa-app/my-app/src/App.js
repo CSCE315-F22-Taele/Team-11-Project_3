@@ -5,6 +5,7 @@ import Manager from './Manager';
 import Server from './Server';
 import Customer from './Customer';
 import ReactDOM from 'react-dom/client';
+import MapPage from './MapPage';
 import { Button } from 'antd';
 
 function RolePage() {
@@ -32,6 +33,14 @@ function RolePage() {
       </React.StrictMode>
     );
   }
+  function GoToMap() {
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+      <React.StrictMode>
+        <MapPage />
+      </React.StrictMode>
+    );
+  }
   return (
     <div id='body'>
       <div class="headerdiv">
@@ -47,6 +56,7 @@ function RolePage() {
           <Button type="primary" onClick={GoToManager}>Manager</Button >
           <Button type="primary" onClick={GoToServer}>Server</Button >
           <Button type="primary" onClick={GoToCustomer}>Customer</Button >
+          <Button type="primary" onClick={GoToMap}>Get Map</Button >
         </div>
       </div>
     </div>
