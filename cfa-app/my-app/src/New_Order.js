@@ -32,6 +32,7 @@ function New_Order() {
   });
 
 
+
   useEffect(() => {
     // Using fetch to fetch the api from 
     // flask server it will be redirected to proxy
@@ -52,6 +53,7 @@ function New_Order() {
             });
         })
     );
+
   }, []);
 
   itemArr = data.QueryResult;
@@ -115,41 +117,49 @@ function New_Order() {
     var queryToRun = "INSERT INTO ordertable (order_id, contents, total_cost, time) VALUES('" + newOrderNumber + "', '" + orderComposition + "', '" + totalCost + "', '" + time + "');";
     fetch("/result/" + queryToRun);
 
-    console.log(listOfMenuItems)
+
     var i = 0;
     // TODO: create dictionary of inventory item and number of times used in order
-    while(i < listOfMenuItems.length){
-      queryToRun = "SELECT composition FROM menutable WHERE name = '" + listOfMenuItems[i] + "';"
-      fetch("/data/" + queryToRun).then((res) =>
-        res.json().then((result) => {
-          let contents = String(result.QueryResult[0]).replaceAll("'", "").replaceAll("(", "").replaceAll(")", "").replaceAll(",", "").replaceAll("| ", "|").trim().split('|');
-          if(contents[0] != "undefined"){
-            for(var j = 0; j < contents.length; j++){
-              if(contents[j] in inventoryDict){
-                inventoryDict[contents[j]] = inventoryDict[contents[j]] + 1
-              }
-              else{
-                inventoryDict[contents[j]] = 1;
-              }
-            }
-          }
-        }))
-        i++
+
+
+    //parse the composition of all menu items
+    var menu_ingredients_arr = data.QueryResult
+    var new_menu_arr = []
+    for (var i = 0; i < menu_ingredients_arr.length; i++){
+      new_menu_arr.push(menu_ingredients_arr[i].replaceAll("'", "").replaceAll("(", "").replaceAll(")", "").trim().split(','));
+    }
+    
+    var menu_composition = {}
+    for( var i = 0; i < new_menu_arr.length; ++i){
+      new_menu_arr[i][1]  = new_menu_arr[i][1].split('|')
+      menu_composition[new_menu_arr[i][0]] = new_menu_arr[i][1]
     }
 
-    console.log(inventoryDict)
+
+ 
+    for (i= 0; i < listOfMenuItems.length; ++i){
+      let contents = menu_composition[listOfMenuItems[i]]
+
+      for (var j = 0; j < contents.length; ++j){
+        if(contents[j] in inventoryDict){
+          inventoryDict[contents[j]] = inventoryDict[contents[j]] + 1
+        }
+        else{
+          inventoryDict[contents[j]] = 1;
+        }
+      }
+    }
+
+
+
     // TODO: update item tables with decreased inventory
     const items = Object.keys(inventoryDict);
-    console.log(Object.values(inventoryDict))
+
     for(var item in inventoryDict){
-      console.log(item + " : " + inventoryDict[item])
-      // queryToRun = "SELECT quantity FROM itemtable where name = '" + items[i] + "';"
-      // console.log(queryToRun)
-      // fetch("/data/" + queryToRun).then((res) =>
-      //   res.json().then((result) => {
-      //     let quant = String(result.QueryResult[0]);
-      //     console.log(quant)
-      //   }))
+   
+      queryToRun = "UPDATE itemtable SET quantity = quantity - " + inventoryDict[item] + " where name = '" + item.trim() + "';"
+      console.log(queryToRun)
+      fetch("/result/" + queryToRun)
     }
 
     

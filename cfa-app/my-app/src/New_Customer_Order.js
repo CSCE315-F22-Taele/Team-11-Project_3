@@ -16,7 +16,8 @@ function New_Customer_Order() {
   var totalCost = 0.0;
   var newOrderNumber;
   listOfMenuItems = [];
-  var lastOrderQuery = 'SELECT * FROM ordertable ORDER BY order_id DESC LIMIT 1;';
+  var lastOrderQuery = 'SELECT * FROM ordertable ORDER BY order_id DESC LIMIT 1;'; 
+  var inventoryDict = {}
 
   var seasonalItemStatus = false;
   // const [seasonalItemStatus, setSeasonalItemStatus] = useState(false);
@@ -117,6 +118,52 @@ function New_Customer_Order() {
     var queryToRun = "INSERT INTO ordertable (order_id, contents, total_cost, time) VALUES('" + newOrderNumber + "', '" + orderComposition + "', '" + totalCost + "', '" + time + "');";
     fetch("/result/" + queryToRun);
 
+
+
+    var i = 0;
+    // TODO: create dictionary of inventory item and number of times used in order
+
+
+    //parse the composition of all menu items
+    var menu_ingredients_arr = data.QueryResult
+    var new_menu_arr = []
+    for (var i = 0; i < menu_ingredients_arr.length; i++){
+      new_menu_arr.push(menu_ingredients_arr[i].replaceAll("'", "").replaceAll("(", "").replaceAll(")", "").trim().split(','));
+    }
+    
+    var menu_composition = {}
+    for( var i = 0; i < new_menu_arr.length; ++i){
+      new_menu_arr[i][1]  = new_menu_arr[i][1].split('|')
+      menu_composition[new_menu_arr[i][0]] = new_menu_arr[i][1]
+    }
+
+
+ 
+    for (i= 0; i < listOfMenuItems.length; ++i){
+      let contents = menu_composition[listOfMenuItems[i]]
+
+      for (var j = 0; j < contents.length; ++j){
+        if(contents[j] in inventoryDict){
+          inventoryDict[contents[j]] = inventoryDict[contents[j]] + 1
+        }
+        else{
+          inventoryDict[contents[j]] = 1;
+        }
+      }
+    }
+
+
+
+    // TODO: update item tables with decreased inventory
+    const items = Object.keys(inventoryDict);
+
+    for(var item in inventoryDict){
+      
+
+      queryToRun = "UPDATE itemtable SET quantity = quantity - " + inventoryDict[item] + " where name = '" + item.trim() + "';"
+      console.log(queryToRun)
+      fetch("/result/" + queryToRun)
+    }
 
     // TODO: update item tables with decreased inventory
 
