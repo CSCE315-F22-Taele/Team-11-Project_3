@@ -17,7 +17,7 @@ function Restock_Report() {
   useEffect(() => {
     // Using fetch to fetch the api from 
     // flask server it will be redirected to proxy
-    fetch("/data/itemtable").then((res) =>
+    fetch("https://cfa-flask.herokuapp.com/data/itemtable").then((res) =>
         res.json().then((data) => {
             // Setting a data from api
             setdata({

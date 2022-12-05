@@ -27,12 +27,12 @@ function Add_Seasonal_Menu_Item() {
   const [data, setdata] = useState({
     QueryResult: "n/a"
   });
-
+//https://cfa-flask.herokuapp.com/data/itemtable
   // Using useEffect for single rendering
   useEffect(() => {
     // Using fetch to fetch the api from 
     // flask server it will be redirected to proxy
-    fetch("/data/itemtable").then((res) =>
+    fetch("https://cfa-flask.herokuapp.com/data/itemtable").then((res) =>
         res.json().then((data) => {
             // Setting a data from api
             setdata({
@@ -64,7 +64,7 @@ for (var i = 0; i < newItem.length; i++){
 
   function submitNewMenuItem(){
     var queryToRun = "INSERT INTO menutable (name, composition, cost) VALUES ('SI: " + newMenuItemName + "', '" + inputItems + "', '$" + newMenuItemPrice + "')";
-    fetch("/result/" + queryToRun);
+    fetch("https://cfa-flask.herokuapp.com/resutl/" + queryToRun);
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
@@ -99,7 +99,7 @@ for (var i = 0; i < newItem.length; i++){
     }
 
     var queryToRun = "INSERT INTO itemtable (name, type, cost, quantity, reorder_threshold) VALUES ('" + newItemInput + "', 'Ingredient', '$0.10', '0', '0')";
-    fetch("/result/" + queryToRun);
+    fetch("https://cfa-flask.herokuapp.com/result/" + queryToRun);
   }
 
   const [selected, setSelected] = useState('Chicken Sandwich');

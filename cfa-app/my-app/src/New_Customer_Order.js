@@ -36,7 +36,7 @@ function New_Customer_Order() {
   useEffect(() => {
     // Using fetch to fetch the api from 
     // flask server it will be redirected to proxy
-    fetch("/data/menutable").then((res) =>
+    fetch("https://cfa-flask.herokuapp.com/data/menutable").then((res) =>
         res.json().then((data) => {
             // Setting a data from api
             setdata({
@@ -45,7 +45,7 @@ function New_Customer_Order() {
         })
     );
 
-    fetch("/data/" + lastOrderQuery).then((res) =>
+    fetch("https://cfa-flask.herokuapp.com/data/" + lastOrderQuery).then((res) =>
         res.json().then((orderNumber) => {
             // Setting a data from api
             setOrderNumber({
@@ -116,7 +116,7 @@ function New_Customer_Order() {
   
     const time = `${year}-${month}-${date} ${hour}:${minute}:${second}`;
     var queryToRun = "INSERT INTO ordertable (order_id, contents, total_cost, time) VALUES('" + newOrderNumber + "', '" + orderComposition + "', '" + totalCost + "', '" + time + "');";
-    fetch("/result/" + queryToRun);
+    fetch("https://cfa-flask.herokuapp.com/result/" + queryToRun);
 
 
 
@@ -162,7 +162,7 @@ function New_Customer_Order() {
 
       queryToRun = "UPDATE itemtable SET quantity = quantity - " + inventoryDict[item] + " where name = '" + item.trim() + "';"
       console.log(queryToRun)
-      fetch("/result/" + queryToRun)
+      fetch("https://cfa-flask.herokuapp.com/result/" + queryToRun)
     }
 
     // TODO: update item tables with decreased inventory

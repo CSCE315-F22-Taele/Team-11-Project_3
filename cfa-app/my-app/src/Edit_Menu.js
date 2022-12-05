@@ -18,7 +18,7 @@ function Edit_Menu() {
   useEffect(() => {
       // Using fetch to fetch the api from 
       // flask server it will be redirected to proxy
-      fetch("/data/menutable").then((res) =>
+      fetch("https://cfa-flask.herokuapp.com/data/menutable").then((res) =>
           res.json().then((data) => {
               // Setting a data from api
               setdata({
@@ -47,7 +47,7 @@ function Edit_Menu() {
     // Using fetch to fetch the api from 
     // flask server it will be redirected to proxy
     var queryToRun = "UPDATE menutable SET cost = '" + price + "' WHERE name = '" + selected + "'";
-    fetch("/result/" + queryToRun);
+    fetch("https://cfa-flask.herokuapp.com/result/" + queryToRun);
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>

@@ -35,7 +35,7 @@ function Excess_Report() {
 
   useEffect(() => {
     
-    var queryString2 = "/data/menutable"
+    var queryString2 = "https://cfa-flask.herokuapp.com/data/menutable"
     fetch(queryString2).then((res) =>
     res.json().then((menu_ingredients) => {
         // Setting a data from api
@@ -49,7 +49,7 @@ function Excess_Report() {
 }, []);
 
   function get_ingredients(){
-    var queryString3 = "/data/itemtable"
+    var queryString3 = "https://cfa-flask.herokuapp.com/data/itemtable"
       fetch(queryString3).then((res) =>
       res.json().then((ingredients_onhand) => {
           // Setting a data from api
@@ -68,7 +68,7 @@ function Excess_Report() {
 
     var todayDate = yyyy + '-' + mm + '-' + dd;
 
-    var queryString = "/data/SELECT * FROM ordertable WHERE time BETWEEN '" + date + "' AND '" + todayDate +"'"
+    var queryString = "https://cfa-flask.herokuapp.com/data/SELECT * FROM ordertable WHERE time BETWEEN '" + date + "' AND '" + todayDate +"'"
     fetch(queryString).then((res) =>
     res.json().then((data) => {
         // Setting a data from api
