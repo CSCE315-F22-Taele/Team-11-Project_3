@@ -7,13 +7,14 @@ import Customer from './Customer';
 import ReactDOM from 'react-dom/client';
 import MapPage from './MapPage';
 import { Button } from 'antd';
+import Auth_Signin from './Auth_Signin';
 
 function RolePage() {
   function GoToManager() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
-        <Manager />
+        <Auth_Signin/>
       </React.StrictMode>
     );
   }
