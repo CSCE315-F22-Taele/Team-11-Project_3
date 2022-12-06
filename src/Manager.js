@@ -70,27 +70,88 @@ function Manager() {
       </React.StrictMode>
     );
   }
+  function setSmallText() {
+    var elements = document.querySelectorAll("[id='textMed']");
+    if(elements.length === 0){
+      elements = document.querySelectorAll("[id='textSmall']");
+      if(elements.length === 0){
+        elements = document.querySelectorAll("[id='textLarge']");
+      }
+    }
+    for(var i = 0; i < elements.length; i++) {
+      elements[i].id='textSmall';
+    }
+    return false;
+  }
+  function setMedText() {
+    var elements = document.querySelectorAll("[id='textMed']");
+    if(elements.length === 0){
+      elements = document.querySelectorAll("[id='textSmall']");
+      if(elements.length === 0){
+        elements = document.querySelectorAll("[id='textLarge']");
+      }
+    }
+    for(var i = 0; i < elements.length; i++) {
+      elements[i].id='textMed';
+    }
+    return false;
+  }
+  function setLargeText() {
+    var elements = document.querySelectorAll("[id='textMed']");
+    if(elements.length === 0){
+      elements = document.querySelectorAll("[id='textSmall']");
+      if(elements.length === 0){
+        elements = document.querySelectorAll("[id='textLarge']");
+      }
+    }
+    for(var i = 0; i < elements.length; i++) {
+      elements[i].id='textLarge';
+    }
+    return false;
+  }
+  function zoomIn(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) + 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+  function zoomOut(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) - 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
   return (
 
     <div id='body'>
-      <div class="headerdiv">
+      <div class="headerdiv" id="textSize">
         Chick-fil-A!
       </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="pageHeader">Welcome To Manager Page!</div>
+          <div class="pageHeader" id="textSize">Welcome To Manager Page!</div>
         </div>
         <div className="container">
-          <Button type="primary" onClick={GoToEditInventory}> Edit Inventory</Button>
-          <Button type="primary" onClick={GoToEditMenu}> Edit Menu</Button>
-          <Button type="primary" onClick={GoToSalesReport}> Sales Report</Button>
-          <Button type="primary" onClick={GoToExcessReport}> Excess Report</Button>
-          <Button type="primary" onClick={GoToRestockReport}> Restock Report</Button>
-          <Button type="primary" onClick={GoToAddSeasonalMenuItem}> Add Seasonal Menu Item</Button>
+          <Button type="primary" id="textSize" onClick={GoToEditInventory}> Edit Inventory</Button>
+          <Button type="primary" id="textSize" onClick={GoToEditMenu}> Edit Menu</Button>
+          <Button type="primary" id="textSize" onClick={GoToSalesReport}> Sales Report</Button>
+          <Button type="primary" id="textSize" onClick={GoToExcessReport}> Excess Report</Button>
+          <Button type="primary" id="textSize" onClick={GoToRestockReport}> Restock Report</Button>
+          <Button type="primary" id="textSize" onClick={GoToAddSeasonalMenuItem}> Add Seasonal Menu Item</Button>
         </div>
       </header>
       <div class="footerdiv">
-        <Button class="returnButton" onClick={ReturnToHome}>Return</Button>
+        <Button class="returnButton" id="textSize" onClick={ReturnToHome}>Return</Button>
+        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
       </div>
     </div>
     

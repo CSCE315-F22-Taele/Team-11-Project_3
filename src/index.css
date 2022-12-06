@@ -122,6 +122,22 @@ button {
   margin-left: 5%;
 }
 
+#textMed {
+  font-size: 18px;
+}
+
+#textSmall{
+  font-size: 12px;
+}
+
+#textLarge{
+  font-size: 24px;
+}
+
+#textSize{
+  font-size: 18px;
+}
+
 /* ant design component styling */
 
 /* default button */

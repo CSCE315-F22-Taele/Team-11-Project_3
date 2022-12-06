@@ -26,21 +26,43 @@ function Customer() {
       </React.StrictMode>
     );
   }
+  function zoomIn(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) + 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+  function zoomOut(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) - 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
   return (
     <div id='body'>
-      <div class="headerdiv">
+      <div class="headerdiv" id="textSize">
         Chick-fil-A!
       </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="pageHeader">Welcome to the Customer Page!</div>
+          <div class="pageHeader" id="textSize">Welcome to the Customer Page!</div>
         </div>
         <div className="container">
-          <Button type="primary" onClick={GoToNewOrder}>New Order</Button>
+          <Button type="primary" id="textSize" onClick={GoToNewOrder}>New Order</Button>
         </div>
       </header>
       <div class="footerdiv">
-        <Button onClick={ReturnToHome}>Return</Button>
+        <Button id="textSize" onClick={ReturnToHome}>Return</Button>
+        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
       </div>
     </div>
 

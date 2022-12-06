@@ -151,8 +151,6 @@ function New_Order() {
     }
 
 
-
-    // TODO: update item tables with decreased inventory
     const items = Object.keys(inventoryDict);
 
     for(var item in inventoryDict){
@@ -171,20 +169,43 @@ function New_Order() {
     );
     
   }
+
+  function zoomIn(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) + 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+  function zoomOut(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) - 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
   return (
     <div id='body'>
-      <div class="headerdiv">
+      <div class="headerdiv" id="textSize">
         Chick-fil-A!
       </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="pageHeader">New Order!</div>
+          <div class="pageHeader" id="textSize">New Order!</div>
         </div>
-        <div id="total" >Total: $0.00</div>
-        <div className="flex-container">
+        <div id="textSize">
+          <div id="total" >Total: $0.00</div>
+        </div>
+        <div id="textSize" className="flex-container">
           <div id="receipt" class="box">Order Receipt: <br></br><br></br>
           </div>
-          <div className="flex-container-order-buttons">
+          <div id="textSize" className="flex-container-order-buttons">
             <Button type="primary" onClick={() => addToOrder('8 ct Chick-fil-A Nuggets')}>8 ct Chick-fil-A Nuggets</Button>
             <Button type="primary" onClick={() => addToOrder('12 ct Chick-fil-A Nuggets')}>12 ct Chick-fil-A Nuggets</Button>
             <Button type="primary" onClick={() => addToOrder('3 ct Chick-fil-A Chick-n-Strips')}>3 ct Chick-fil-A Chick-n-Strips</Button>
@@ -214,8 +235,10 @@ function New_Order() {
       </header>
 
       <div class="footerdiv">
-        <Button onClick={returnToServerPage}>Cancel</Button>
-        <Button type="primary" onClick={runQueryAndReturnToServerPage}>Submit</Button>
+        <Button id="textSize" onClick={returnToServerPage}>Cancel</Button>
+        <Button type="primary" id="textSize" onClick={runQueryAndReturnToServerPage}>Submit</Button>
+        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
       </div>
     </div>
 

@@ -180,19 +180,40 @@ function Sales_Report() {
     );
   }
  
+  function zoomIn(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) + 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+  function zoomOut(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) - 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+
   return (
     
     <div id='body'>
-      <div class="headerdiv">
+      <div class="headerdiv" id="textSize">
         Chick-fil-A!
       </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="pageHeader">Sales Report</div>
+          <div class="pageHeader" id="textSize">Sales Report</div>
         </div>
       </header>
       
-      <div className="scrollTab">
+      <div className="scrollTab" id="textSize">
       <p>Sales Report for each item:</p>
       <table cellpadding="2"cellspacing="15">
           <thead>
@@ -218,9 +239,9 @@ function Sales_Report() {
         <div>
 
       </div>
-      <Form className="form">
-        <label>Date (yyyy-mm-dd):
-          <Input type="text"
+      <Form className="form" id="textSize">
+        <label id="textSize">Date (yyyy-mm-dd):
+          <Input type="text" id="textSize"
           className="inputs"
           value = {date}
           onChange={handlePrice}/>
@@ -228,8 +249,10 @@ function Sales_Report() {
         </Form>
       
       <div class="footerdiv">
-        <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
-        <Button type="primary" onClick={getData}>Submit</Button>
+        <Button id="textSize" class="returnButton" onClick={ReturnToManager}>Return</Button>
+        <Button type="primary" id="textSize" onClick={getData}>Submit</Button>
+        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
       </div>
     </div>
     
