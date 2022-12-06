@@ -9,9 +9,13 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.0.1",
     "dotenv": "^16.0.3",
+    "gapi-script": "^1.2.0",
+    "googleapis": "^109.0.1",
     "pg": "^8.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-login": "^5.2.2",
+    "react-native-web": "^0.18.10",
     "react-router": "^6.4.3",
     "react-scripts": "^2.1.8",
     "web-vitals": "^2.1.4"
