@@ -64,7 +64,7 @@ for (var i = 0; i < newItem.length; i++){
 
   function submitNewMenuItem(){
     var queryToRun = "INSERT INTO menutable (name, composition, cost) VALUES ('SI: " + newMenuItemName + "', '" + inputItems + "', '$" + newMenuItemPrice + "')";
-    fetch("https://cfa-flask.herokuapp.com/resutl/" + queryToRun);
+    fetch("https://cfa-flask.herokuapp.com/result/" + queryToRun);
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
