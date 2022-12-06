@@ -177,17 +177,41 @@ function New_Customer_Order() {
     );
     
   }
+
+  function zoomIn(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) + 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+  function zoomOut(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) - 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+
   return (
     <div id='body'>
-      <div class="headerdiv">
+      <div class="headerdiv" id="textSize">
         Chick-fil-A!
       </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="pageHeader">Place your order below!</div>
+          <div id="textSize"class="pageHeader">Place your order below!</div>
         </div>
-        <div id="total" >Total: $0.00</div>
-        <div className="flex-container">
+        <div id="textSize">
+          <div id="total" >Total: $0.00</div>
+        </div>
+        <div id="textSize" className="flex-container">
           <div id="receipt" class="box">Order Receipt: <br></br><br></br>
           </div>
           <div className="flex-container-order-buttons">
@@ -218,8 +242,10 @@ function New_Customer_Order() {
         </div>
       </header>
       <div class="footerdiv">
-        <Button onClick={returnToServerPage}>Cancel</Button>
-        <Button type="primary" onClick={runQueryAndReturnToServerPage}>Submit</Button>
+        <Button id="textSize" onClick={returnToServerPage}>Cancel</Button>
+        <Button type="primary" id="textSize" onClick={runQueryAndReturnToServerPage}>Submit</Button>
+        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
       </div>
     </div>
 

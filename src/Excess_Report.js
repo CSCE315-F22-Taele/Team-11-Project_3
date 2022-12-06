@@ -180,21 +180,42 @@ function Excess_Report() {
       </React.StrictMode>
     );
   }
+
+  function zoomIn(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) + 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+  function zoomOut(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) - 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
  
   return (
     
     <div id='body'>
-      <div class="headerdiv">
+      <div class="headerdiv" id="textSize">
         Chick-fil-A!
       </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="pageHeader">Excess Report</div>
+          <div class="pageHeader" id="textSize">Excess Report</div>
         </div>
       </header>
-      <div className="scrollTab">
-      <p>The following items have an excess:</p>
-      <table cellpadding="2"cellspacing="15">
+      <div className="scrollTab" id="textSize">
+      <p id="textSize">The following items have an excess:</p>
+      <table cellpadding="2"cellspacing="15" id="textSize">
           <thead>
             <tr>
               <th>Item Name</th>
@@ -218,17 +239,19 @@ function Excess_Report() {
         <div>
 
       </div>
-      <Form className="form">
-        <label>Date (yyyy-mm-dd):
-          <Input className="inputs" type="text"
+      <Form className="form" id="textSize">
+        <label id="textSize">Date (yyyy-mm-dd):
+          <Input className="inputs" id="textSize" type="text"
           value = {date}
           onChange={handlePrice}/>
         </label>
         </Form>
       
       <div class="footerdiv">
-        <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
-        <Button type="primary" onClick={getData}>Submit</Button>
+        <Button class="returnButton" id="textSize" onClick={ReturnToManager}>Return</Button>
+        <Button type="primary" id="textSize" onClick={getData}>Submit</Button>
+        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
       </div>
    
     </div>

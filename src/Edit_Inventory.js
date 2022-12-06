@@ -48,10 +48,6 @@ function Edit_Inventory() {
     }
     )
   }
-  
-
-  
-
   function ReturnToManager() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
@@ -60,8 +56,6 @@ function Edit_Inventory() {
       </React.StrictMode>
     );
   }
-
-
   function SubmitUpdate(){
       // Using fetch to fetch the api from 
       // flask server it will be redirected to proxy
@@ -106,22 +100,43 @@ function Edit_Inventory() {
     setReorder_threshold(event.target.value);
   }
 
+  function zoomIn(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) + 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+  function zoomOut(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) - 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+
 
 
   // initialize();
   return (
 
     <div id='body'>
-      <div class="headerdiv">
+      <div class="headerdiv" id="textSize">
         Chick-fil-A!
       </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="pageHeader">Edit Inventory</div>
+          <div class="pageHeader" id="textSize">Edit Inventory</div>
         </div>
       </header>
-      <div className="scrollTab">
-      <table className="padding-table-columns" cellpadding="2"cellspacing="15">
+      <div id="textSize" className="scrollTab">
+      <table className="padding-table-columns" id="textSize" cellpadding="2"cellspacing="15">
           <thead>
             <tr>
               <th>Name</th>
@@ -146,11 +161,11 @@ function Edit_Inventory() {
           </tbody>
         </table>
         </div>
-        <div className="margin-from-left">
-          <Select value={selected} onChange={handleChange}>
+        <div id="textSize" className="margin-from-left">
+          <Select id="textSize" value={selected} onChange={handleChange}>
           {listOfItems.map((option) => (
 
-            <Select.Option value={option.Name}>{option.Name}</Select.Option>
+            <Select.Option id="textSize" value={option.Name}>{option.Name}</Select.Option>
 
           ))}
           </Select>
@@ -158,22 +173,22 @@ function Edit_Inventory() {
         
         <div>
           <Form className="form">
-            <label>Price:
-              <Input type="text"
+            <label id="textSize">Price:
+              <Input id="textSize" type="text"
                 className="inputs"
                 value={price}
                 onChange={handlePrice}/>
             </label>
             
-            <label>Quantity:
-              <Input type="text"
+            <label id="textSize">Quantity:
+              <Input id="textSize" type="text"
                 className="inputs"
                 value={quantity}
                 onChange={handleQuantity}/>
             </label>
           
-            <label>Reorder Threshold:
-              <Input type="text"
+            <label id="textSize">Reorder Threshold:
+              <Input id="textSize" type="text"
                 className="inputs"
                 value={reorder_threshold}
                 onChange={handleReorder}/>
@@ -182,8 +197,10 @@ function Edit_Inventory() {
         </div>
 
       <div class="footerdiv">
-        <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
-        <Button type="primary" onClick={SubmitUpdate}>Submit</Button>
+        <Button id="textSize" class="returnButton" onClick={ReturnToManager}>Return</Button>
+        <Button id="textSize" type="primary" onClick={SubmitUpdate}>Submit</Button>
+        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
       </div>
     </div>
 

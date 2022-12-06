@@ -21,16 +21,37 @@ function MapPage() {
     );
   }
 
-
+  function zoomIn(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) + 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+  function zoomOut(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) - 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
 
   return (
     <div id='body'>
-      <div class="headerdiv">
+      <div class="headerdiv" id="textSize">
         Chick-fil-A!
       </div>
       <MapContainer/>
       <div class="footerdiv">
-        <Button onClick={ReturnToHome}>Return</Button>
+        <Button id="textSize" onClick={ReturnToHome}>Return</Button>
+        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
       </div>
     </div>
 

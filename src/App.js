@@ -41,22 +41,46 @@ function RolePage() {
       </React.StrictMode>
     );
   }
+  function zoomIn(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) + 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+  function zoomOut(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) - 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
   return (
     <div id='body'>
-      <div class="headerdiv">
+      <div class="headerdiv" id="textSize">
         Chick-fil-A!
       </div>
       <div>
         <header className="SelectRole">
-          <div class="appHeader">
+          <div class="appHeader" id="textSize">
             Please Select A Role:
           </div>
         </header>
         <div className="container">
-          <Button type="primary" onClick={GoToManager}>Manager</Button >
-          <Button type="primary" onClick={GoToServer}>Server</Button >
-          <Button type="primary" onClick={GoToCustomer}>Customer</Button >
-          <Button type="primary" onClick={GoToMap}>Get Map</Button >
+          <Button type="primary" id="textSize" onClick={GoToManager}>Manager</Button >
+          <Button type="primary" id="textSize" onClick={GoToServer}>Server</Button >
+          <Button type="primary" id="textSize" onClick={GoToCustomer}>Customer</Button >
+          <Button type="primary" id="textSize" onClick={GoToMap}>Get Map</Button >
+        </div>
+        <div className='footerdiv'>
+          <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+          <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
         </div>
       </div>
     </div>

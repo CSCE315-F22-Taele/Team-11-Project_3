@@ -78,18 +78,39 @@ const handlePrice = event => {
     );
   }
 
+  function zoomIn(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) + 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+  function zoomOut(){
+    var elements, style;
+    elements = document.querySelectorAll('#textSize');
+    for(var i = 0; i < elements.length; i++){
+      style = getComputedStyle(elements[i]);
+      var size = style.fontSize
+      var newSize = parseInt(size) - 2 
+      elements[i].style.fontSize = newSize.toString() + "px";
+    }
+  }
+
   return (
     <div id='body'>
-      <div class="headerdiv">
+      <div class="headerdiv" id="textSize">
         Chick-fil-A!
       </div>
       <header className="SelectRole">
         <div class="flex-container">
-          <div class="pageHeader">Edit Menu</div>
+          <div class="pageHeader" id="textSize">Edit Menu</div>
         </div>
       </header>
-      <div className="scrollTab">
-      <table cellpadding="2"cellspacing="15">
+      <div className="scrollTab" id="textSize">
+      <table cellpadding="2"cellspacing="15" id="textSize">
           <thead>
             <tr>
               <th>Name</th>
@@ -108,17 +129,17 @@ const handlePrice = event => {
           </tbody>
         </table>
         </div>
-        <div className="margin-from-left">
-          <Select value={selected} onChange={handleChange}>
+        <div className="margin-from-left" id="textSize">
+          <Select  id="textSize"value={selected} onChange={handleChange}>
             {listOfItems.map((option) => (
-              <Select.Option value={option.Name}>{option.Name}</Select.Option>
+              <Select.Option id="textSize" value={option.Name}>{option.Name}</Select.Option>
             ))}
           </Select>
         </div>
         <div>
        <Form className="form">
-        <label>Price:
-          <Input type="text"
+        <label id="textSize">Price:
+          <Input type="text" id="textSize"
           className="inputs"
           value={price}
           onChange={handlePrice}/>
@@ -127,8 +148,10 @@ const handlePrice = event => {
       </div>
 
       <div class="footerdiv">
-        <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
-        <Button type="primary" onClick={SubmitUpdate}>Submit</Button>
+        <Button class="returnButton" id="textSize" onClick={ReturnToManager}>Return</Button>
+        <Button type="primary" id="textSize" onClick={SubmitUpdate}>Submit</Button>
+        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
       </div>
     </div>
 
