@@ -27,6 +27,31 @@ gapi.load("client:auth2", () => {
   });
 
 function Auth_Signin() {
+    function zoomIn(){
+        var elements, style;
+        elements = document.querySelectorAll('#textSize');
+        console.log(elements);
+        for(var i = 0; i < elements.length; i++){
+          style = getComputedStyle(elements[i]);
+          var size = style.fontSize
+          console.log(size)
+          var newSize = parseInt(size) + 2 
+          elements[i].style.fontSize = newSize.toString() + "px";
+        }
+      }
+      function zoomOut(){
+        var elements, style;
+        elements = document.querySelectorAll('#textSize');
+        console.log(elements);
+        for(var i = 0; i < elements.length; i++){
+          style = getComputedStyle(elements[i]);
+          var size = style.fontSize
+          console.log(size)
+          var newSize = parseInt(size) - 2 
+          elements[i].style.fontSize = newSize.toString() + "px";
+        }
+      }
+    
     function ReturnToHome() {
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(
@@ -75,7 +100,9 @@ function Auth_Signin() {
         </div>
       </div>
       <div class="footerdiv">
-        <Button class="returnButton" onClick={ReturnToHome}>Return</Button>
+      <Button id="textSize" onClick={ReturnToHome}>Return</Button>
+        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
+        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
         
       </div>
     </div>
