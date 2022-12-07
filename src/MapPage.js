@@ -1,6 +1,6 @@
 import './App.css';
 import './index.css'
-import React from 'react';
+import React, { useState } from 'react';
 import App from './App';
 import Manager from './Manager';
 import Server from './Server';
@@ -10,8 +10,24 @@ import New_Order from './New_Order';
 import { Button } from 'antd';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import MapContainer from './MapContainer';
+import { Translator, Translate } from 'react-auto-translate';
+
 
 function MapPage() {
+  const cacheProvider = {
+    get: (language, key) =>
+      ((JSON.parse(localStorage.getItem('translations')) || {})[key] || {})[
+      language
+      ],
+    set: (language, key, value) => {
+      const existing = JSON.parse(localStorage.getItem('translations')) || {
+        [key]: {},
+      };
+      existing[key] = { ...existing[key], [language]: value };
+      localStorage.setItem('translations', JSON.stringify(existing));
+    },
+  };
+  const [to, setTo] = useState('en');
   function ReturnToHome() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
@@ -21,40 +37,50 @@ function MapPage() {
     );
   }
 
-  function zoomIn(){
+  function zoomIn() {
     var elements, style;
     elements = document.querySelectorAll('#textSize');
-    for(var i = 0; i < elements.length; i++){
+    for (var i = 0; i < elements.length; i++) {
       style = getComputedStyle(elements[i]);
       var size = style.fontSize
-      var newSize = parseInt(size) + 2 
+      var newSize = parseInt(size) + 2
       elements[i].style.fontSize = newSize.toString() + "px";
     }
   }
-  function zoomOut(){
+  function zoomOut() {
     var elements, style;
     elements = document.querySelectorAll('#textSize');
-    for(var i = 0; i < elements.length; i++){
+    for (var i = 0; i < elements.length; i++) {
       style = getComputedStyle(elements[i]);
       var size = style.fontSize
-      var newSize = parseInt(size) - 2 
+      var newSize = parseInt(size) - 2
       elements[i].style.fontSize = newSize.toString() + "px";
     }
   }
 
   return (
-    <div id='body'>
-      <div class="headerdiv" id="textSize">
-        Chick-fil-A!
+    <Translator
+      cacheProvider={cacheProvider}
+      from='en'
+      to={to}
+      googleApiKey="AIzaSyDjxzm3xTJFmVHB3rVDI4N9uNPPPX50MuQ"
+    >
+      <div id='body'>
+        <div class="headerdiv" id="textSize">
+          Chick-fil-A!
+        </div>
+        <MapContainer />
+        <div class="footerdiv">
+          <Button id="textSize" onClick={ReturnToHome}><Translate>Return</Translate></Button>
+          <select class="langSelect" value={to} onChange={({ target: { value } }) => setTo(value)}>
+            <option value="es">Español</option>
+            <option value="en">English</option>
+          </select>
+          <Button type="primary" id="textSize" onClick={zoomIn}><Translate>Zoom In</Translate></Button >
+          <Button type="primary" id="textSize" onClick={zoomOut}><Translate>Zoom Out</Translate></Button >
+        </div>
       </div>
-      <MapContainer/>
-      <div class="footerdiv">
-        <Button id="textSize" onClick={ReturnToHome}>Return</Button>
-        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
-        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
-      </div>
-    </div>
-
+    </Translator>
   );
 }
 
