@@ -10,6 +10,9 @@ import { Button } from 'antd';
 import Auth_Signin from './Auth_Signin';
 import { Translator, Translate } from 'react-auto-translate';
 
+ /**
+ * Page where manager, customer, or server side is selected
+ */
 function RolePage() {
   //cache provider for local language storage
   const cacheProvider = {
@@ -34,6 +37,10 @@ function RolePage() {
       </React.StrictMode>
     );
   }
+
+ /**
+ * Pulls up server page
+ */
   function GoToServer() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
@@ -42,6 +49,10 @@ function RolePage() {
       </React.StrictMode>
     );
   }
+
+ /**
+ * pulls up customer page
+ */
   function GoToCustomer() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
@@ -50,6 +61,10 @@ function RolePage() {
       </React.StrictMode>
     );
   }
+
+ /**
+ * Pulls up page with map to location.
+ */
   function GoToMap() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
@@ -58,6 +73,10 @@ function RolePage() {
       </React.StrictMode>
     );
   }
+
+ /**
+ * This function magnifies the text onscreen.
+ */
   function zoomIn() {
     var elements, style;
     elements = document.querySelectorAll('#textSize');
@@ -68,6 +87,10 @@ function RolePage() {
       elements[i].style.fontSize = newSize.toString() + "px";
     }
   }
+
+ /**
+ * This function zooms the onscreen text out.
+ */
   function zoomOut() {
     var elements, style;
     elements = document.querySelectorAll('#textSize');

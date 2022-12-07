@@ -10,6 +10,9 @@ import New_Order from './New_Order';
 import { Button } from 'antd';
 import { Translator, Translate } from 'react-auto-translate';
 
+ /**
+ * The customer page is where a customer can self-order.
+ */
 function Customer() {
   const [to, setTo] = useState('en');
   const cacheProvider = {
@@ -25,6 +28,10 @@ function Customer() {
       localStorage.setItem('translations', JSON.stringify(existing));
     },
   };
+
+ /**
+ * Returns to home page.
+ */
   function ReturnToHome() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(

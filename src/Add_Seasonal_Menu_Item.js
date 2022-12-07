@@ -10,13 +10,13 @@ import { Button, Select, Input } from 'antd';
 import { Translator, Translate } from 'react-auto-translate';
 
 
-//TO DELETE ITEM: DELETE FROM menutable WHERE name like 'SI:%';
-// psql -h csce-315-db.engr.tamu.edu -U <username> -d <database>
-// Username = csce315_[section no.]_[last name in lowercase]
-// Multiple last names: Del Potro becomes del_potro 
-// Database = csce315_[section no.]_[team number]
-// Password: first name
-
+/**TO DELETE ITEM: DELETE FROM menutable WHERE name like 'SI:%';
+* psql -h csce-315-db.engr.tamu.edu -U <username> -d <database>
+* Username = csce315_[section no.]_[last name in lowercase]
+* Multiple last names: Del Potro becomes del_potro 
+* Database = csce315_[section no.]_[team number]
+* Password: first name
+*/
 
 function Add_Seasonal_Menu_Item() {
 
@@ -42,11 +42,14 @@ function Add_Seasonal_Menu_Item() {
   const [data, setdata] = useState({
     QueryResult: "n/a"
   });
-  //https://cfa-flask.herokuapp.com/data/itemtable
-  // Using useEffect for single rendering
+  /**https://cfa-flask.herokuapp.com/data/itemtable
+  * Using useEffect for single rendering
+  */
   useEffect(() => {
-    // Using fetch to fetch the api from 
-    // flask server it will be redirected to proxy
+    /** 
+     *  Using fetch to fetch the api from 
+     * flask server it will be redirected to proxy
+     */
     fetch("https://cfa-flask.herokuapp.com/data/itemtable").then((res) =>
       res.json().then((data) => {
         // Setting a data from api
@@ -78,6 +81,10 @@ function Add_Seasonal_Menu_Item() {
 
   }
 
+
+  /**
+   * creates new menu item
+   */
   function submitNewMenuItem() {
     var queryToRun = "INSERT INTO menutable (name, composition, cost) VALUES ('SI: " + newMenuItemName + "', '" + inputItems + "', '$" + newMenuItemPrice + "')";
     fetch("https://cfa-flask.herokuapp.com/result/" + queryToRun);
@@ -96,7 +103,9 @@ function Add_Seasonal_Menu_Item() {
 
   const [first, setFirst] = useState(true);
 
-
+/**
+ * adds ingredients to dropwdown view
+ */
   function addMenuItemIngredient() {
     if (first) {
       setFirst(false);
@@ -106,6 +115,10 @@ function Add_Seasonal_Menu_Item() {
     }
 
   }
+
+  /**
+ * adds new ingredients for seasonal menu item
+ */
   function addMenuItemNewIngredient() {
     if (first) {
       setFirst(false);
@@ -132,6 +145,7 @@ function Add_Seasonal_Menu_Item() {
 
   const [newMenuItemPrice, setNewMenuItemPrice] = useState('');
 
+  
   const handleNewMenuItemName = event => {
     setNewMenuItemName(event.target.value);
   }
@@ -148,7 +162,9 @@ function Add_Seasonal_Menu_Item() {
     setNewItemInput(event.target.value);
   }
 
-
+ /**
+ * Returns to manager page
+ */
   function ReturnToManager() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(

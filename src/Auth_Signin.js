@@ -29,6 +29,9 @@ gapi.load("client:auth2", () => {
   });
 });
 
+ /**
+ * Verifies login using the google auth api
+ */
 function Auth_Signin() {
   const cacheProvider = {
     get: (language, key) =>
@@ -69,6 +72,9 @@ function Auth_Signin() {
     }
   }
 
+ /**
+ * Goes back to home page.
+ */
   function ReturnToHome() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
@@ -77,6 +83,8 @@ function Auth_Signin() {
       </React.StrictMode>
     );
   }
+
+  
   function onSuccess(res) {
     console.log("success login", res)
     const root = ReactDOM.createRoot(document.getElementById('root'));
