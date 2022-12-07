@@ -7,6 +7,8 @@ import ReactDOM from 'react-dom/client';
 import Manager from "./Manager";
 import React, { useState, useEffect } from 'react';
 import { Button, Select, Input } from 'antd';
+import { Translator, Translate } from 'react-auto-translate';
+
 
 //TO DELETE ITEM: DELETE FROM menutable WHERE name like 'SI:%';
 // psql -h csce-315-db.engr.tamu.edu -U <username> -d <database>
@@ -23,46 +25,60 @@ function Add_Seasonal_Menu_Item() {
   var listOfItems;
   var newItemIngredientList = "";
 
-
+  const cacheProvider = {
+    get: (language, key) =>
+      ((JSON.parse(localStorage.getItem('translations')) || {})[key] || {})[
+      language
+      ],
+    set: (language, key, value) => {
+      const existing = JSON.parse(localStorage.getItem('translations')) || {
+        [key]: {},
+      };
+      existing[key] = { ...existing[key], [language]: value };
+      localStorage.setItem('translations', JSON.stringify(existing));
+    },
+  };
+  const [to, setTo] = useState('en');
   const [data, setdata] = useState({
     QueryResult: "n/a"
   });
-//https://cfa-flask.herokuapp.com/data/itemtable
+  //https://cfa-flask.herokuapp.com/data/itemtable
   // Using useEffect for single rendering
   useEffect(() => {
     // Using fetch to fetch the api from 
     // flask server it will be redirected to proxy
     fetch("https://cfa-flask.herokuapp.com/data/itemtable").then((res) =>
-        res.json().then((data) => {
-            // Setting a data from api
-            setdata({
-                QueryResult: data.QueryResult
-            });
-        })
+      res.json().then((data) => {
+        // Setting a data from api
+        setdata({
+          QueryResult: data.QueryResult
+        });
+      })
     );
-}, []);
-itemArr = data.QueryResult;
-newItem = [];
-for (var i = 0; i < itemArr.length; i++){
-  newItem.push(itemArr[i].replaceAll("'", "").replaceAll("(", "").replaceAll(")", "").trim().split(','));
-}
-listOfItems = [];
-for (var i = 0; i < newItem.length; i++){
-  listOfItems.push(
-    {"Name":newItem[i][0],
-    "Type":newItem[i][1],
-    "Cost":newItem[i][2],
-    "Quantity":newItem[i][3],
-    "Reorder_Threshold":newItem[i][4]
+  }, []);
+  itemArr = data.QueryResult;
+  newItem = [];
+  for (var i = 0; i < itemArr.length; i++) {
+    newItem.push(itemArr[i].replaceAll("'", "").replaceAll("(", "").replaceAll(")", "").trim().split(','));
   }
-  )
-}
+  listOfItems = [];
+  for (var i = 0; i < newItem.length; i++) {
+    listOfItems.push(
+      {
+        "Name": newItem[i][0],
+        "Type": newItem[i][1],
+        "Cost": newItem[i][2],
+        "Quantity": newItem[i][3],
+        "Reorder_Threshold": newItem[i][4]
+      }
+    )
+  }
 
   function handleChange() {
 
   }
 
-  function submitNewMenuItem(){
+  function submitNewMenuItem() {
     var queryToRun = "INSERT INTO menutable (name, composition, cost) VALUES ('SI: " + newMenuItemName + "', '" + inputItems + "', '$" + newMenuItemPrice + "')";
     fetch("https://cfa-flask.herokuapp.com/result/" + queryToRun);
 
@@ -74,15 +90,15 @@ for (var i = 0; i < newItem.length; i++){
     );
   }
 
-  
 
-  
+
+
 
   const [first, setFirst] = useState(true);
 
 
-  function addMenuItemIngredient(){
-    if (first){
+  function addMenuItemIngredient() {
+    if (first) {
       setFirst(false);
       setInputItems(inputItems + dropdownInput);
     } else {
@@ -90,8 +106,8 @@ for (var i = 0; i < newItem.length; i++){
     }
 
   }
-  function addMenuItemNewIngredient(){
-    if (first){
+  function addMenuItemNewIngredient() {
+    if (first) {
       setFirst(false);
       setInputItems(inputItems + newItemInput);
     } else {
@@ -142,75 +158,84 @@ for (var i = 0; i < newItem.length; i++){
     );
   }
 
-  
-    return (
 
+  return (
+    <Translator
+      cacheProvider={cacheProvider}
+      from='en'
+      to={to}
+      googleApiKey="AIzaSyDjxzm3xTJFmVHB3rVDI4N9uNPPPX50MuQ">
       <div id='body'>
         <div class="headerdiv">
-        Chick-fil-A!
-      </div>
+          Chick-fil-A!
+        </div>
         <header className="SelectRole">
           <div className="flex-container">
-            <div class="pageHeader">Add Seasonal Item</div>
+            <div class="pageHeader"><Translate>Add Seasonal Item</Translate></div>
           </div>
         </header>
 
         <div>
           <table className="margin-from-left">
             <tr>
-              <td>New Menu Item Name:</td>
-              <td><Input className="inputs-large" type="text" value={newMenuItemName} onChange={handleNewMenuItemName}/></td>
+              <td><Translate>New Menu Item Name:</Translate></td>
+              <td><Input className="inputs-large" type="text" value={newMenuItemName} onChange={handleNewMenuItemName} /></td>
             </tr>
 
             <tr>
-              <td>New Menu Item Price:</td>
-              <td><Input className="inputs-large" type="text" value={newMenuItemPrice} onChange={handleNewMenuItemPrice}/></td>
+              <td><Translate>New Menu Item Price:</Translate></td>
+              <td><Input className="inputs-large" type="text" value={newMenuItemPrice} onChange={handleNewMenuItemPrice} /></td>
             </tr>
 
             <tr>
               <td>
                 <Select value={dropdownInput} onChange={handleNewDropdownSelection}>
                   {listOfItems.map((option) => (
-                  <option value={option.Name}>{option.Name}</option>
+                    <option value={option.Name}>{option.Name}</option>
                   ))}
                 </Select>
               </td>
 
-              <td/>
+              <td />
 
               <td>
-                <Button type="primary" onClick={addMenuItemIngredient}>Add Ingredient</Button>
+                <Button type="primary" onClick={addMenuItemIngredient}><Translate>Add Ingredient</Translate></Button>
               </td>
             </tr>
 
             <tr>
               <td>
-                <Input className="inputs-large" type="text" value={newItemInput} onChange={handleNewItemInput}/>
+                <Input className="inputs-large" type="text" value={newItemInput} onChange={handleNewItemInput} />
               </td>
 
-              <td/>
+              <td />
 
               <td>
-                <Button type="primary" onClick={addMenuItemNewIngredient}>Add New Ingredient</Button>
+                <Button type="primary" onClick={addMenuItemNewIngredient}><Translate>Add New Ingredient</Translate></Button>
               </td>
             </tr>
           </table>
-          
+
           <table className="margin-from-left">
             <tr>
-              <td>Menu Item Contents:</td>
+              <td><Translate>Menu Item Contents:</Translate></td>
               <td>{inputItems}</td>
             </tr>
           </table>
-      </div>
+        </div>
 
-      
-      <div class="footerdiv">
-        <Button class="returnButton" onClick={ReturnToManager}>Return</Button>
-        <Button type="primary" onClick={submitNewMenuItem}>Submit Seasonal Item</Button>
+
+        <div class="footerdiv">
+          <Button class="returnButton" onClick={ReturnToManager}><Translate>Return</Translate></Button>
+          <select class="langSelect" value={to} onChange={({ target: { value } }) => setTo(value)}>
+            <option value="es">Español</option>
+            <option value="en">English</option>
+          </select>
+          <Button type="primary" onClick={submitNewMenuItem}><Translate>Submit Seasonal Item</Translate></Button>
+        </div>
       </div>
-      </div>      
-    );
-  }
-  
+    </Translator>
+  );
+}
+
 export default Add_Seasonal_Menu_Item;

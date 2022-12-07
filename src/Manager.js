@@ -1,6 +1,6 @@
 import './App.css';
 import './index.css'
-import React from 'react';
+import React, { useState } from 'react';
 import App from './App';
 import Server from './Server';
 import Customer from './Customer';
@@ -12,8 +12,24 @@ import Excess_Report from './Excess_Report';
 import Restock_Report from './Restock_Report';
 import Add_Seasonal_Menu_Item from './Add_Seasonal_Menu_Item';
 import { Button } from 'antd';
+import { Translator, Translate } from 'react-auto-translate';
+
 
 function Manager() {
+  const cacheProvider = {
+    get: (language, key) =>
+      ((JSON.parse(localStorage.getItem('translations')) || {})[key] || {})[
+      language
+      ],
+    set: (language, key, value) => {
+      const existing = JSON.parse(localStorage.getItem('translations')) || {
+        [key]: {},
+      };
+      existing[key] = { ...existing[key], [language]: value };
+      localStorage.setItem('translations', JSON.stringify(existing));
+    },
+  };
+  const [to, setTo] = useState('en');
   function ReturnToHome() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
@@ -72,93 +88,102 @@ function Manager() {
   }
   function setSmallText() {
     var elements = document.querySelectorAll("[id='textMed']");
-    if(elements.length === 0){
+    if (elements.length === 0) {
       elements = document.querySelectorAll("[id='textSmall']");
-      if(elements.length === 0){
+      if (elements.length === 0) {
         elements = document.querySelectorAll("[id='textLarge']");
       }
     }
-    for(var i = 0; i < elements.length; i++) {
-      elements[i].id='textSmall';
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].id = 'textSmall';
     }
     return false;
   }
   function setMedText() {
     var elements = document.querySelectorAll("[id='textMed']");
-    if(elements.length === 0){
+    if (elements.length === 0) {
       elements = document.querySelectorAll("[id='textSmall']");
-      if(elements.length === 0){
+      if (elements.length === 0) {
         elements = document.querySelectorAll("[id='textLarge']");
       }
     }
-    for(var i = 0; i < elements.length; i++) {
-      elements[i].id='textMed';
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].id = 'textMed';
     }
     return false;
   }
   function setLargeText() {
     var elements = document.querySelectorAll("[id='textMed']");
-    if(elements.length === 0){
+    if (elements.length === 0) {
       elements = document.querySelectorAll("[id='textSmall']");
-      if(elements.length === 0){
+      if (elements.length === 0) {
         elements = document.querySelectorAll("[id='textLarge']");
       }
     }
-    for(var i = 0; i < elements.length; i++) {
-      elements[i].id='textLarge';
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].id = 'textLarge';
     }
     return false;
   }
-  function zoomIn(){
+  function zoomIn() {
     var elements, style;
     elements = document.querySelectorAll('#textSize');
-    for(var i = 0; i < elements.length; i++){
+    for (var i = 0; i < elements.length; i++) {
       style = getComputedStyle(elements[i]);
       var size = style.fontSize
-      var newSize = parseInt(size) + 2 
+      var newSize = parseInt(size) + 2
       elements[i].style.fontSize = newSize.toString() + "px";
     }
   }
-  function zoomOut(){
+  function zoomOut() {
     var elements, style;
     elements = document.querySelectorAll('#textSize');
-    for(var i = 0; i < elements.length; i++){
+    for (var i = 0; i < elements.length; i++) {
       style = getComputedStyle(elements[i]);
       var size = style.fontSize
-      var newSize = parseInt(size) - 2 
+      var newSize = parseInt(size) - 2
       elements[i].style.fontSize = newSize.toString() + "px";
     }
   }
   return (
-
-    <div id='body'>
-      <div class="headerdiv" id="textSize">
-        Chick-fil-A!
-      </div>
-      <header className="SelectRole">
-        <div class="flex-container">
-          <div class="pageHeader" id="textSize">Welcome To Manager Page!</div>
+    <Translator
+      cacheProvider={cacheProvider}
+      from='en'
+      to={to}
+      googleApiKey="AIzaSyDjxzm3xTJFmVHB3rVDI4N9uNPPPX50MuQ"
+    >
+      <div id='body'>
+        <div class="headerdiv" id="textSize">
+          Chick-fil-A!
         </div>
-        <div className="container">
-          <Button type="primary" id="textSize" onClick={GoToEditInventory}> Edit Inventory</Button>
-          <Button type="primary" id="textSize" onClick={GoToEditMenu}> Edit Menu</Button>
-          <Button type="primary" id="textSize" onClick={GoToSalesReport}> Sales Report</Button>
-          <Button type="primary" id="textSize" onClick={GoToExcessReport}> Excess Report</Button>
-          <Button type="primary" id="textSize" onClick={GoToRestockReport}> Restock Report</Button>
-          <Button type="primary" id="textSize" onClick={GoToAddSeasonalMenuItem}> Add Seasonal Menu Item</Button>
+        <header className="SelectRole">
+          <div class="flex-container">
+            <div class="pageHeader" id="textSize"> <Translate>Welcome To Manager Page!</Translate></div>
+          </div>
+          <div className="container">
+            <Button type="primary" id="textSize" onClick={GoToEditInventory}> <Translate> Edit Inventory</Translate></Button>
+            <Button type="primary" id="textSize" onClick={GoToEditMenu}> <Translate> Edit Menu</Translate></Button>
+            <Button type="primary" id="textSize" onClick={GoToSalesReport}> <Translate> Sales Report</Translate></Button>
+            <Button type="primary" id="textSize" onClick={GoToExcessReport}> <Translate> Excess Report</Translate></Button>
+            <Button type="primary" id="textSize" onClick={GoToRestockReport}> <Translate> Restock Report</Translate></Button>
+            <Button type="primary" id="textSize" onClick={GoToAddSeasonalMenuItem}> <Translate> Add Seasonal Menu Item</Translate></Button>
+          </div>
+        </header>
+        <div class="footerdiv">
+          <Button class="returnButton" id="textSize" onClick={ReturnToHome}> <Translate>Return</Translate></Button>
+          <select class="langSelect" value={to} onChange={({ target: { value } }) => setTo(value)}>
+            <option value="es">Español</option>
+            <option value="en">English</option>
+          </select>
+          <Button type="primary" id="textSize" onClick={zoomIn}> <Translate>Zoom In</Translate></Button >
+          <Button type="primary" id="textSize" onClick={zoomOut}> <Translate>Zoom Out</Translate></Button >
         </div>
-      </header>
-      <div class="footerdiv">
-        <Button class="returnButton" id="textSize" onClick={ReturnToHome}>Return</Button>
-        <Button type="primary" id="textSize" onClick={zoomIn}>Zoom In</Button >
-        <Button type="primary" id="textSize" onClick={zoomOut}>Zoom Out</Button >
       </div>
-    </div>
-    
 
 
 
 
+    </Translator>
   );
 }
 

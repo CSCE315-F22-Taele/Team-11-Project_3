@@ -48,6 +48,22 @@ button {
   width: 200px;
 }
 
+.langSelect,
+.langSelect:hover,
+.langSelect:active,
+.langSelect:focus {
+  color: #E60E33;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 0 rgb(0 0 0 / 20%);
+  font-size: 100%;
+  font-weight: bold;
+  height: max-content;
+  margin: auto 0;
+  padding: 10px 10px;
+  border-radius: 5px;
+  border: 0;
+}
+
 .returnButton {
   margin: auto;
 }
@@ -126,15 +142,15 @@ button {
   font-size: 18px;
 }
 
-#textSmall{
+#textSmall {
   font-size: 12px;
 }
 
-#textLarge{
+#textLarge {
   font-size: 24px;
 }
 
-#textSize{
+#textSize {
   font-size: 18px;
 }
 
